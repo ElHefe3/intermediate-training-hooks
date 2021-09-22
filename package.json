@@ -1,0 +1,32 @@
+{
+  "name": "@codehesionza/cra-template-codehesion",
+  "version": "1.0.0",
+  "main": "template.json",
+  "keywords": [
+    "react",
+    "create-react-app",
+    "typescript",
+    "template"
+  ],
+  "description": "This is the base ReactJS template for Codehesion",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/codehesion/react-template-codehesion"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.15"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/codehesion/react-template-codehesion/issues"
+  },
+  "files": [
+    "template",
+    "template.json"
+  ],
+  "homepage": "https://gitlab.com/codehesion/react-template-codehesion#readme",
+  "publishConfig": {
+    "cache": "cache/.npm",
+    "@codehesionza:registry":"https://gitlab.com/api/v4/projects/29591329/packages/npm/"
+  }
+}

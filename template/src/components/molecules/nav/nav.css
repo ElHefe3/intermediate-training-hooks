@@ -1,0 +1,11 @@
+.nav-container {
+    @apply flex flex-col h-screen w-screen
+}
+
+.nav-bar-container {
+    @apply flex justify-end min-h-16 items-center px-3
+}
+
+.nav-icon-color {
+    @apply text-gray-400
+}
