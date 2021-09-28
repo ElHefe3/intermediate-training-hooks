@@ -16,5 +16,5 @@ echo "@codehesionza:registry=https://gitlab.com/api/v4/packages/npm/" >> ~/.npmr
 
 Then, run the following command (changing `MyApp` to the name of your app):
 ```
-npx create-react-app MyApp --template @codehesionza/react-template-codehesion
+npx create-react-app MyApp --template @codehesionza/cra-template-codehesion
 ```
