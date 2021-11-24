@@ -6,5 +6,4 @@
 .vscode
 *.swp
 *.swo
-.husky
 .npmrc

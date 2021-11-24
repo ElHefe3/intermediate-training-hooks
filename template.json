@@ -9,9 +9,10 @@
       "build-ts": "tsc ./src/utils/validate-dependencies/check-dependencies-for-wildcards.ts",
       "lint": "eslint --fix --max-warnings=0 \"{src,jest-setup}/**/*.ts\" ./src/",
       "prettier": "prettier --write \"{src,jest-setup}/**/*.tsx\" src/index.tsx",
-      "pre-commit": "lint-staged && yarn build-ts && yarn ensure-no-wild-cards",
+      "pre-commit": "lint-staged && yarn build-ts --skipLibCheck && yarn ensure-no-wild-cards",
       "build:css": "postcss src/styles/tailwind.css -o src/styles/styles.css",
-      "watch:css": "TAILWIND_MODE=watch postcss src/styles/tailwind.css -o src/styles/styles.css"
+      "watch:css": "TAILWIND_MODE=watch postcss src/styles/tailwind.css -o src/styles/styles.css",
+      "prepare": "husky install"
     },
     "engines": {
       "node": ">14.15"
@@ -71,7 +72,7 @@
       "eslint-plugin-prettier": "3.4.0",
       "eslint-plugin-react": "7.24.0",
       "eslint-plugin-react-hooks": "4.2.0",
-      "husky": "7.0.1",
+      "husky": "7.0.4",
       "lint-staged": "11.1.1",
       "postcss": "7.0.36",
       "postcss-cli": "8.3.1",
