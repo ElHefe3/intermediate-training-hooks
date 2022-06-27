@@ -1,0 +1,3 @@
+.active-drawer-item {
+    @apply border-l-8 border-yellow-400
+}
