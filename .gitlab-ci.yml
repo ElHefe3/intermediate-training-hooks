@@ -1,0 +1,22 @@
+image: node:14.19.3-alpine3.16
+
+stages:
+  - build
+
+build-job:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    REPOSITORY: $AZ_REGISTRY/react/template
+  before_script:
+    - docker login $AZ_REGISTRY -u $AZ_USER -p $AZ_PASSWORD
+  script:
+    - export CI_CURRENT_DATE=$(date +%Y-%m-%d)
+    - docker build -f Dockerfile -t $REPOSITORY:$CI_CURRENT_DATE-$CI_JOB_ID .
+    - docker push $REPOSITORY:$CI_CURRENT_DATE-$CI_JOB_ID
+  only:
+    - main
+    - staging
+    - merge_requests

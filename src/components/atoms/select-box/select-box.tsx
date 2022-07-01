@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 import { SelectBoxProps } from './types';
 
-export const SelectBox: React.FunctionComponent<SelectBoxProps> = ({
+export const SelectBox: React.FC<SelectBoxProps> = ({
   name,
   label,
   placeholder,
@@ -56,7 +56,7 @@ export const SelectBox: React.FunctionComponent<SelectBoxProps> = ({
     const { ...props } = multiProps;
 
     if (_.lt(index, maxSelect))
-      return <components.MultiValue {...props} children={props.children} />;
+      return <components.MultiValue {...props}>{props.children}</components.MultiValue>;
 
     if (_.eq(index, maxSelect)) {
       const overflow = _.get(multiProps, 'getValue')()

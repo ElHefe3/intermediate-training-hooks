@@ -7,7 +7,7 @@ import { userAuthService } from '@project/services';
 import { forgotPasswordValidation } from './validators';
 import { ForgotPasswordValuesProps } from './types';
 
-export const ForgotPasswordForm: React.FunctionComponent = () => {
+export const ForgotPasswordForm: React.FC = () => {
   const initialValues: ForgotPasswordValuesProps = {
     username: '',
   };

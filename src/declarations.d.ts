@@ -1,4 +1,4 @@
 import { FunctionComponent } from 'react';
 declare module 'react' {
-  export interface StatelessComponent<P = {}> extends FunctionComponent<P> {}
+  export type StatelessComponent<P = Record<string, unknown>> = FunctionComponent<P>;
 }

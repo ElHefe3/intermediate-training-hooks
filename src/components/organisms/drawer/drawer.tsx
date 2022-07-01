@@ -21,7 +21,7 @@ const archivedChildren: ChildLinks[] = [
 export const Drawer = () => {
   const location = useLocation();
 
-  const DrawerItem: React.FunctionComponent<DrawerItemProps> = ({
+  const DrawerItem: React.FC<DrawerItemProps> = ({
     name,
     link = '/ignore',
     icon,
@@ -44,22 +44,22 @@ export const Drawer = () => {
 
     useEffect(() => {
       subItems.forEach((child) => {
-        let activeChild: boolean;
+        let _activeChild: boolean;
 
         if (strict) {
-          activeChild = location.pathname === child.link;
+          _activeChild = location.pathname === child.link;
         } else {
           const subLinkMatch = _.filter(child.matchLinks, includes).length > 0;
           const subHasNoIgnores = _.filter(ignoreLinks, includes).length === 0;
 
-          activeChild =
+          _activeChild =
             _.startsWith(location.pathname, child.link) &&
             hasNoIgnores &&
             subLinkMatch &&
             subHasNoIgnores;
         }
 
-        if (activeChild) {
+        if (_activeChild) {
           setIsOpen(true);
           setActiveChild(child.name);
         }
@@ -76,11 +76,11 @@ export const Drawer = () => {
       }
     }, []);
 
-    const SubItem = ({ child, activeChild }: { child: ChildLinks; activeChild: boolean }) => {
+    const SubItem = ({ child, isActiveChild }: { child: ChildLinks; isActiveChild: boolean }) => {
       return (
         <NavLink key={child.name} to={child.link}>
-          <div className={activeChild ? 'active-drawer-item' : ''}>
-            <div className={`mx-4 py-3 ${activeChild ? 'ml-2' : ''}`}>
+          <div className={isActiveChild ? 'active-drawer-item' : ''}>
+            <div className={`mx-4 py-3 ${isActiveChild ? 'ml-2' : ''}`}>
               <span className="ml-10" />
               <span>{child.name}</span>
             </div>
@@ -115,7 +115,7 @@ export const Drawer = () => {
                     <SubItem
                       key={child.name}
                       child={child}
-                      activeChild={child.name === activeChild}
+                      isActiveChild={child.name === activeChild}
                     />
                   );
                 })}

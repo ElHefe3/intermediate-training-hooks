@@ -3,10 +3,7 @@ import _ from 'lodash';
 
 import { SearchFieldProps } from './types';
 
-export const SearchField: React.FunctionComponent<SearchFieldProps> = ({
-  placeholder,
-  onChange,
-}) => {
+export const SearchField: React.FC<SearchFieldProps> = ({ placeholder, onChange }) => {
   const [search, setSearch] = useState('');
 
   const validateInputDebounce = useCallback(

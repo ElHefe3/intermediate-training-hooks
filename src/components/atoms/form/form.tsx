@@ -1,11 +1,10 @@
-import React from 'react';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
 import { toast } from 'react-hot-toast';
 import _ from 'lodash';
 
 import { FormProps, ErrorObject } from './types';
 
-export const Form = <T extends {}>({
+export const Form = <T extends Record<string, unknown>>({
   initialValues,
   submitForm,
   onSuccess,
