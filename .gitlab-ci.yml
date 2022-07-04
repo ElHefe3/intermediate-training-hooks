@@ -2,9 +2,19 @@ image: node:14.19.3-alpine3.16
 
 stages:
   - build
+  - deploy
 
 build-job:
   stage: build
+  script:
+    - yarn install
+    - yarn lint
+    - yarn build
+  only:
+    - merge_requests
+
+deploy-job:
+  stage: deploy
   image: docker:latest
   services:
     - docker:dind
@@ -18,5 +28,3 @@ build-job:
     - docker push $REPOSITORY:$CI_CURRENT_DATE-$CI_JOB_ID
   only:
     - main
-    - staging
-    - merge_requests

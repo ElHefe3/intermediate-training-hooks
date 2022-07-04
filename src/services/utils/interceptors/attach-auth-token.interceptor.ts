@@ -2,7 +2,7 @@ import { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 export const createAttachTokenInterceptor = (
   axiosInstance: AxiosInstance,
-  getAccessToken: () => string,
+  getAccessToken: () => string | object | null,
 ) => {
   const _attachAccessToken = (_config: AxiosRequestConfig) => {
     const accessToken = getAccessToken();
