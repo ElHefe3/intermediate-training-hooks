@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import _ from 'lodash';
 
-import { ErrorObject, SideModal, UserForm } from '@project/components';
+import { ErrorObject, UserForm } from '@project/components';
 import { useSideModal } from '@project/hooks';
 import { User, userModel, useUserQuery } from '@project/react-queries';
 import { userService } from '@project/services';

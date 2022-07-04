@@ -8,7 +8,7 @@ import { GlobalRouter } from './global/global.router';
 
 const Router = () => {
   const location = useLocation();
-  let state = location.state as { backgroundLocation?: Location };
+  const state = location.state as { backgroundLocation?: Location };
 
   return useRoutes(
     _.concat(AuthRouter, AppRouter, GlobalRouter),
@@ -22,7 +22,7 @@ const ModalRouter = () => {
 
 export const RootRouter = () => {
   const location = useLocation();
-  let state = location.state as { backgroundLocation?: Location };
+  const state = location.state as { backgroundLocation?: Location };
 
   return (
     <>

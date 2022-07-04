@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
-import { ErrorObject, SideModal, UserForm } from '@project/components';
+import { ErrorObject, UserForm } from '@project/components';
 import { useSideModal } from '@project/hooks';
 import { User, userModel } from '@project/react-queries';
 import { userService } from '@project/services';

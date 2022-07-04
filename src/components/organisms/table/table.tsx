@@ -3,7 +3,7 @@ import { getCoreRowModel, useTableInstance, getPaginationRowModel } from '@tanst
 import { ActivityLoader } from '@project/components';
 import { TableProps } from './types';
 
-export const Table = <T extends {}>({
+export const Table = <T extends Record<string, unknown>>({
   table,
   columns,
   data,

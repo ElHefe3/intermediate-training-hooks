@@ -3,7 +3,7 @@ import React from 'react';
 import { ActivityLoader } from '@project/components';
 import { ButtonProps } from './types';
 
-export const Button: React.FunctionComponent<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   children,
   type = 'button',
   variant = 'contained',

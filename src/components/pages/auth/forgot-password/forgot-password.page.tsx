@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthLayout, FormScreenContainer, ForgotPasswordForm, Button } from '@project/components';
 import { Logo } from '@project/assets';
 
-export const ForgotPasswordPage: React.FunctionComponent = () => {
+export const ForgotPasswordPage: React.FC = () => {
   const navigate = useNavigate();
 
   const onBack = () => {
