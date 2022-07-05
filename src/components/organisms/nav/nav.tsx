@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import _ from 'lodash';
 
 import { ChildrenProps } from '@project/types';
-import { useCurrentUserQuery } from '@project/react-queries';
+import { useCurrentUserQuery } from '@project/queries';
 import { userAuthService } from '@project/services';
 
 export const Nav = ({ children }: ChildrenProps) => {

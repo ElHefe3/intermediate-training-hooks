@@ -3,7 +3,7 @@ import { toast } from 'react-hot-toast';
 
 import { ErrorObject, UserForm } from '@project/components';
 import { useSideModal } from '@project/hooks';
-import { User, userModel } from '@project/react-queries';
+import { User, userModel } from '@project/queries';
 import { userService } from '@project/services';
 
 export const NewUserPage = () => {

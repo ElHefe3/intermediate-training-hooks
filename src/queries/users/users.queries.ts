@@ -1,5 +1,7 @@
 import { useQuery } from 'react-query';
 
+import { ErrorObject } from '@project/components';
+import { useLogout } from '@project/hooks';
 import { userService } from '@project/services';
 
 export const useUsersQuery = (page: number, getArchived?: boolean) =>
@@ -11,3 +13,16 @@ export const useUserQuery = (id: number) =>
   useQuery(['getUser', id], () => userService.getUser(id), {
     keepPreviousData: true,
   });
+
+export const useCurrentUserQuery = () => {
+  const { signOut } = useLogout();
+
+  return useQuery('getCurrentUser', userService.getCurrentUser, {
+    staleTime: Infinity,
+    onError: (error: ErrorObject<string>) => {
+      if (error.statusCode === 401) {
+        return signOut();
+      }
+    },
+  });
+};

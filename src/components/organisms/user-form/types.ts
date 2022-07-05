@@ -1,5 +1,5 @@
 import { BaseFormProps } from '@project/components';
-import { User } from '@project/react-queries';
+import { User } from '@project/queries';
 
 export interface UserProps extends BaseFormProps<User> {
   isEdit?: boolean;

@@ -5,4 +5,3 @@ dist-ssr
 *.local
 builds/
 cache/
-node_modules/

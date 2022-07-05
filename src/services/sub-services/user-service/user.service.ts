@@ -1,6 +1,6 @@
 import { authNetworkService } from '@project/services';
 import { getData } from '@project/services/utils';
-import { User } from '@project/react-queries';
+import { User } from '@project/queries';
 import userUrls from './user.urls';
 import { userDto } from './user.dto';
 
