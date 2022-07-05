@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import { ErrorObject, UserForm } from '@project/components';
 import { useSideModal } from '@project/hooks';
-import { User, userModel, useUserQuery } from '@project/react-queries';
+import { User, userModel, useUserQuery } from '@project/queries';
 import { userService } from '@project/services';
 import { EditUserPageProps } from './types';
 

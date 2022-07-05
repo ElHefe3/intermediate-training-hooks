@@ -3,7 +3,7 @@ import { createTable } from '@tanstack/react-table';
 
 import { Button, Table } from '@project/components';
 import { useUsersData, usePagination } from '@project/hooks';
-import { User } from '@project/react-queries';
+import { User } from '@project/queries';
 import { UserPageProps } from './types';
 
 export const UsersPage = ({ isArchived }: UserPageProps) => {

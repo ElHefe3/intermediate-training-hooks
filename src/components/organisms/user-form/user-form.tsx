@@ -2,7 +2,7 @@ import { FormikProps } from 'formik/dist/types';
 import { useParams } from 'react-router-dom';
 
 import { Button, Form, TextField } from '@project/components';
-import { User } from '@project/react-queries';
+import { User } from '@project/queries';
 import { userService } from '@project/services';
 import { UserProps } from './types';
 import { userValidation } from './validators';

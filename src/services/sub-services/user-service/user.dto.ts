@@ -1,4 +1,4 @@
-import { User } from '../../../react-queries';
+import { User } from '../../../queries';
 
 export const userDto = (formData: User) => ({
   user: {
