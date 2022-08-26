@@ -1,5 +1,6 @@
 import React from 'react';
-import { QueryClientProvider, QueryClient } from 'react-query';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -19,6 +20,7 @@ const App = () => (
     <BrowserRouter>
       <RootRouter />
     </BrowserRouter>
+    <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
 );
 

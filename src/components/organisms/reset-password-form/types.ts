@@ -1,5 +1,5 @@
-export type ResetPasswordValuesProps = {
-  password: string;
-  confirmPassword: string;
-  token: string | null;
-};
+import z from 'zod';
+
+import { resetPasswordValidation } from './validators';
+
+export type ResetPasswordValuesProps = z.infer<typeof resetPasswordValidation>;

@@ -1,10 +1,14 @@
-import { getCoreRowModel, useTableInstance, getPaginationRowModel } from '@tanstack/react-table';
+import {
+  getCoreRowModel,
+  useReactTable,
+  getPaginationRowModel,
+  flexRender,
+} from '@tanstack/react-table';
 
-import { ActivityLoader } from '@project/components';
+import { ActivityLoader } from '../../atoms';
 import { TableProps } from './types';
 
 export const Table = <T extends Record<string, unknown>>({
-  table,
   columns,
   data,
   isLoading = false,
@@ -12,7 +16,7 @@ export const Table = <T extends Record<string, unknown>>({
   pagination,
   setPagination,
 }: TableProps<T>) => {
-  const instance = useTableInstance(table, {
+  const instance = useReactTable({
     data: data,
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -32,7 +36,9 @@ export const Table = <T extends Record<string, unknown>>({
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <th key={header.id} colSpan={header.colSpan} className="capitalize p-2">
-                    {header.isPlaceholder ? null : header.renderHeader()}
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(header.column.columnDef.footer, header.getContext())}
                   </th>
                 ))}
               </tr>
@@ -43,7 +49,7 @@ export const Table = <T extends Record<string, unknown>>({
               <tr key={row.id} className="odd:bg-gray-100">
                 {row.getVisibleCells().map((cell) => (
                   <td key={cell.id} className="p-2">
-                    {cell.renderCell()}
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
               </tr>

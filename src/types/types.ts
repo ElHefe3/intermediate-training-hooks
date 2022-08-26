@@ -1,4 +1,7 @@
 import { ReactNode } from 'react';
+import z from 'zod';
+
+import { paginationApiSchema, paginationSchema } from '@project/validators';
 
 export type ChildrenProps = {
   children: ReactNode;
@@ -18,8 +21,6 @@ export type BaseMultiOption = {
   options: BaseOption[];
 };
 
-export type PaginationData = {
-  currentPage: number;
-  totalPages: number;
-  totalCount: number;
-};
+export type Pagination = z.infer<typeof paginationSchema>;
+
+export type PaginationApi = z.infer<typeof paginationApiSchema>;

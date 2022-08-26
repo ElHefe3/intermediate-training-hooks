@@ -1,8 +1,9 @@
-import * as Yup from 'yup';
+import z from 'zod';
 
 import { commonValidations } from '@project/validators';
 
-export const loginValidation = Yup.object({
+export const loginValidation = z.object({
   username: commonValidations.username,
-  password: commonValidations.password(false),
+  password: commonValidations.password,
+  remember: z.boolean(),
 });

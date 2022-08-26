@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 export class ServerNetworkError extends Error {
   errors: any;
   statusCode: number;
@@ -8,8 +6,8 @@ export class ServerNetworkError extends Error {
     super(error);
 
     this.name = 'ServerNetworkError';
-    this.message = _.get(error, 'error', `Request failed with status code ${statusCode}`);
-    this.errors = _.get(error, 'errors');
+    this.message = error?.error ?? `Request failed with status code ${statusCode}`;
+    this.errors = error?.errors;
     this.statusCode = statusCode;
   }
 }

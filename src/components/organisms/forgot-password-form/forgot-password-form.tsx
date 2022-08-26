@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormikProps } from 'formik/dist/types';
+import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
 import { FormBodyContainer, TextField, Button, Form, ErrorObject } from '@project/components';
@@ -8,20 +9,23 @@ import { forgotPasswordValidation } from './validators';
 import { ForgotPasswordValuesProps } from './types';
 
 export const ForgotPasswordForm: React.FC = () => {
-  const initialValues: ForgotPasswordValuesProps = {
+  const initialValues = {
     username: '',
   };
 
-  const submitForm = (formData: ForgotPasswordValuesProps) =>
-    userAuthService.forgotPassword(formData);
+  const { mutateAsync } = useMutation(
+    (formData: ForgotPasswordValuesProps) => userAuthService.forgotPassword(formData),
+    {
+      onSuccess: () => {
+        toast.success('Successfully Sent', { duration: 5000 });
+      },
+      onError: (error: ErrorObject<typeof initialValues>) => {
+        toast.error(error.message, { duration: 5000 });
+      },
+    },
+  );
 
-  const onSuccess = () => {
-    toast.success('Successfully Sent', { duration: 5000 });
-  };
-
-  const onFailure = (error: ErrorObject<typeof initialValues>) => {
-    toast.error(error.message, { duration: 5000 });
-  };
+  const submitForm = (formData: ForgotPasswordValuesProps) => mutateAsync(formData);
 
   const FormComponents = ({
     isSubmitting,
@@ -46,8 +50,6 @@ export const ForgotPasswordForm: React.FC = () => {
     <Form
       initialValues={initialValues}
       submitForm={submitForm}
-      onSuccess={onSuccess}
-      onFailure={onFailure}
       validationSchema={forgotPasswordValidation}
       render={FormComponents}
     />

@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { useNavigate } from 'react-router-dom';
-import _ from 'lodash';
 
 import { ChildrenProps } from '@project/types';
 import { useCurrentUserQuery } from '@project/queries';
@@ -24,7 +23,7 @@ export const Nav = ({ children }: ChildrenProps) => {
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-            {_.get(data, 'email', 'Placeholder')}
+            {data?.email ?? 'Placeholder'}
             <ChevronDownIcon className="w-5 h-5 ml-2 -mr-1" aria-hidden="true" />
           </Menu.Button>
         </div>

@@ -1,16 +1,18 @@
 import _ from 'lodash';
 
+import { User } from '@project/components';
+import { UserApi } from '@project/services';
 import { paginationModel } from '@project/models';
-import { User, UserData } from './types';
+import { UserData, UserDataApi } from './types';
 
-export const userModel = (data = {}): User => ({
-  id: _.get(data, 'id'),
-  firstName: _.get(data, 'first_name'),
-  lastName: _.get(data, 'last_name'),
-  email: _.get(data, 'email'),
+export const userModel = (data?: UserApi): User => ({
+  id: data?.id ?? 0,
+  firstName: data?.first_name ?? '',
+  lastName: data?.last_name ?? '',
+  email: data?.email ?? '',
 });
 
-export const userDataModel = (data = {}): UserData => ({
-  users: _.map(_.get(data, 'users', []), userModel),
-  pagination: paginationModel(_.get(data, 'meta')),
+export const userDataModel = (data?: UserDataApi): UserData => ({
+  users: _.map(data?.users ?? [], userModel),
+  pagination: paginationModel(data?.meta),
 });

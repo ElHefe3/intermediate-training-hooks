@@ -7,8 +7,8 @@ import appConfig from '@project/config';
 const storeAccessAndRefreshTokens = (apiResponse: {
   data: { access_token: string; refresh_token: string };
 }) => {
-  const accessToken = _.get(apiResponse, 'data.access_token', null);
-  const refreshToken = _.get(apiResponse, 'data.refresh_token', null);
+  const accessToken = apiResponse?.data?.access_token ?? null;
+  const refreshToken = apiResponse?.data?.refresh_token ?? null;
   return Promise.all([
     accessTokenOperations.store(accessToken),
     refreshTokenOperations.store(refreshToken),

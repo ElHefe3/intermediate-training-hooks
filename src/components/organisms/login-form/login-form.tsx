@@ -1,49 +1,55 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormikProps } from 'formik/dist/types';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import _ from 'lodash';
 
 import { TextField, Form, Button, ErrorObject, Checkbox } from '@project/components';
 import { localStorageService, userAuthService } from '@project/services';
 import config from '@project/config';
-import { LoginValuesProps } from './types';
-import { loginModel } from './login.model';
+import { LoginValuesProps, RouteState } from './types';
 import { loginValidation } from './validators';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
   const { state, search } = useLocation();
   const [rememberEmail, setRememberEmail] = useState('');
+
   const reset = new URLSearchParams(search).get('reset');
   const unlock = new URLSearchParams(search).get('unlock');
   const rememberMe = localStorageService.getItem(config.rememberMeKey) ?? '';
-  const initialValues = useMemo(
-    () =>
-      loginModel({
-        username: rememberEmail,
-        remember: !_.isEmpty(rememberEmail),
-        password: '',
-      }),
-    [rememberEmail],
-  );
+
+  const initialValues = {
+    username: rememberEmail,
+    password: '',
+    remember: !_.isEmpty(rememberEmail),
+  };
 
   const onForgotPasswordClick = () => {
     navigate('/forgot-password');
   };
 
+  const { mutateAsync } = useMutation(
+    (formData: LoginValuesProps) => userAuthService.login(formData),
+    {
+      onSuccess: (_data, variables) => {
+        localStorageService.setItem(
+          config.rememberMeKey,
+          variables.remember ? variables.username : '',
+        );
+        navigate((state as RouteState)?.from || '/');
+      },
+      onError: (error: ErrorObject<typeof initialValues>) => {
+        const message =
+          error.message === 'invalid_grant' ? 'Invalid email or password' : error.message;
+        toast.error(message, { duration: 5000 });
+      },
+    },
+  );
+
   const submitForm = (formData: LoginValuesProps) => {
-    localStorageService.setItem(config.rememberMeKey, formData.remember ? formData.username : '');
-    return userAuthService.login(formData);
-  };
-
-  const onSuccess = () => {
-    navigate(_.get(state, 'from') || '/');
-  };
-
-  const onFailure = (error: ErrorObject<typeof initialValues>) => {
-    const message = error.message === 'invalid_grant' ? 'Invalid email or password' : error.message;
-    toast.error(message, { duration: 5000 });
+    return mutateAsync(formData);
   };
 
   useEffect(() => {
@@ -91,8 +97,6 @@ export const LoginForm = () => {
     <Form
       initialValues={initialValues}
       submitForm={submitForm}
-      onSuccess={onSuccess}
-      onFailure={onFailure}
       validationSchema={loginValidation}
       render={FormComponents}
     />

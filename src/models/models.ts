@@ -1,9 +1,7 @@
-import _ from 'lodash';
+import { PaginationApi, Pagination } from '../types';
 
-import { PaginationData } from '../types';
-
-export const paginationModel = (data = {}): PaginationData => ({
-  currentPage: _.get(data, 'current_page', 0),
-  totalPages: _.get(data, 'total_pages', 0),
-  totalCount: _.get(data, 'total_count', 0),
+export const paginationModel = (data?: PaginationApi): Pagination => ({
+  currentPage: data?.current_page ?? 0,
+  totalPages: data?.total_pages ?? 0,
+  totalCount: data?.total_count ?? 0,
 });

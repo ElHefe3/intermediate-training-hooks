@@ -11,9 +11,9 @@ export const forgotPasswordDTO = (formData: ForgotPasswordValuesProps) => {
 export const resetPasswordDTO = (formData: ResetPasswordValuesProps) => {
   return {
     user: {
-      password: _.get(formData, 'password'),
-      confirm_password: _.get(formData, 'confirmPassword'),
-      token: _.get(formData, 'token'),
+      password: formData?.password,
+      confirm_password: formData?.confirmPassword,
+      token: formData?.token,
     },
   };
 };

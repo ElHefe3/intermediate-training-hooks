@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
-import _ from 'lodash';
 
 import { UserData, userDataModel, useUsersQuery } from '@project/queries';
+import { paginationModel } from '@project/models';
 
-export const useUsersData = (getArchived?: boolean) => {
+export const useUsersData = (getArchived = false) => {
   const [userData, setUserData] = useState<UserData>({
     users: [],
-    pagination: { currentPage: 0, totalPages: 0, totalCount: 0 },
+    pagination: paginationModel(),
   });
+
   const usersQuery = useUsersQuery(0, getArchived);
 
   useEffect(() => {
-    const data = userDataModel(_.get(usersQuery, 'data', {}));
+    const data = userDataModel(usersQuery.data);
     setUserData(data);
   }, [usersQuery?.data]);
 
-  return userData;
+  return { ...usersQuery, data: userData };
 };
