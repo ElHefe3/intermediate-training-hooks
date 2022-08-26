@@ -3,4 +3,4 @@ export { default as authNetworkService } from './auth-network-service/auth-netwo
 export * from './storage-service';
 export * from './token-service/token.service';
 export { userAuthService } from './user-auth-service';
-export { default as userService } from './user-service/user.service';
+export * from './user-service';

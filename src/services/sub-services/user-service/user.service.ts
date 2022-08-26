@@ -1,8 +1,11 @@
+import { AxiosResponse } from 'axios';
+
+import { User } from '@project/components';
 import { authNetworkService } from '@project/services';
 import { getData } from '@project/services/utils';
-import { User } from '@project/queries';
-import userUrls from './user.urls';
+import { userApiSchema, usersApiSchema } from './validations';
 import { userDto } from './user.dto';
+import userUrls from './user.urls';
 
 const getCurrentUser = () => {
   const url = userUrls.getCurrentUserUrl();
@@ -10,16 +13,20 @@ const getCurrentUser = () => {
   return authNetworkService.get(url).then(getData);
 };
 
-const getUsers = (page: number, getArchived?: boolean) => {
+const getUsers = (page: number, getArchived: boolean) => {
   const url = getArchived ? userUrls.getArchivedUsersUrl(page) : userUrls.getUsersUrl(page);
 
-  return authNetworkService.get(url).then(getData);
+  return authNetworkService
+    .get(url)
+    .then((apiResponse: AxiosResponse) => usersApiSchema.parse(apiResponse.data));
 };
 
 const getUser = (id: number) => {
   const url = userUrls.getUserUrl(id);
 
-  return authNetworkService.get(url).then(getData);
+  return authNetworkService
+    .get(url)
+    .then((apiResponse: AxiosResponse) => userApiSchema.parse(apiResponse.data));
 };
 
 const updateUser = (id: number, formData: User) => {

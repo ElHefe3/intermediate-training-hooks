@@ -1,23 +1,25 @@
-import * as Yup from 'yup';
+import z from 'zod';
 
 export const commonValidations = {
-  username: Yup.string().email('Email must be a valid email').required('Email is required'),
-  password: (edit = false) =>
-    Yup.string()
-      .min(8, 'Password must contain at least 8 characters')
-      .matches(
-        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d])(?!.*\s)/,
-        'Passwords must contain at least one uppercase letter, one lowercase letter, one numeric digit and one special character',
-      )
-      .when('edit', {
-        is: () => !edit,
-        then: Yup.string().required('Enter your password'),
-        otherwise: Yup.string(),
-      }),
-  confirmPassword: Yup.mixed()
-    .test('match', 'Does not match', (value, testContext) => {
-      return testContext.parent.password === testContext.parent.confirmPassword;
-    })
-    .required('Reenter your password'),
-  mobile: Yup.string().required('Must provide a mobile number'),
+  username: z.string().email('Must be a valid email'),
+  password: z
+    .string()
+    .min(8, 'Password must contain at least 8 characters')
+    .regex(/^(?=.*[a-z])/, 'Must have 1 lowercase letter')
+    .regex(/^(?=.*[A-Z])/, 'Must have 1 uppercase letter')
+    .regex(/^(?=.*\d)/, 'Must have 1 digit')
+    .regex(/^(?=.*[^a-zA-Z\d])/, 'Must have 1 symbol'),
+  mobile: z.union([z.string().min(12).startsWith('+27'), z.string().min(10).startsWith('0')]),
 };
+
+export const paginationSchema = z.object({
+  currentPage: z.number(),
+  totalPages: z.number(),
+  totalCount: z.number(),
+});
+
+export const paginationApiSchema = z.object({
+  current_page: z.number(),
+  total_pages: z.number(),
+  total_count: z.number(),
+});

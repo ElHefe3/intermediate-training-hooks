@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormikProps } from 'formik/dist/types';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
 import { Button, ErrorObject, Form } from '@project/components/atoms';
@@ -13,24 +14,28 @@ export const ResetPasswordForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const initialValues: ResetPasswordValuesProps = {
+  const initialValues = {
     password: '',
     confirmPassword: '',
     token: new URLSearchParams(location.search).get('token'),
   };
 
-  const onSubmit = (formData: ResetPasswordValuesProps) => userAuthService.resetPassword(formData);
+  const { mutateAsync } = useMutation(
+    (formData: ResetPasswordValuesProps) => userAuthService.resetPassword(formData),
+    {
+      onSuccess: () => {
+        navigate({
+          pathname: '/login',
+          search: 'reset=successful',
+        });
+      },
+      onError: (error: ErrorObject<typeof initialValues>) => {
+        toast.error(error.message, { duration: 5000 });
+      },
+    },
+  );
 
-  const onSuccess = () => {
-    navigate({
-      pathname: '/login',
-      search: 'reset=successful',
-    });
-  };
-
-  const onFailure = (error: ErrorObject<typeof initialValues>) => {
-    toast.error(error.message, { duration: 5000 });
-  };
+  const onSubmit = (formData: ResetPasswordValuesProps) => mutateAsync(formData);
 
   const FormComponents = ({
     isSubmitting,
@@ -54,8 +59,6 @@ export const ResetPasswordForm = () => {
     <Form
       initialValues={initialValues}
       submitForm={onSubmit}
-      onSuccess={onSuccess}
-      onFailure={onFailure}
       validationSchema={resetPasswordValidation}
       render={FormComponents}
     />

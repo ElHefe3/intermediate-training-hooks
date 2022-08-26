@@ -1,5 +1,4 @@
 import { AxiosError, AxiosInstance } from 'axios';
-import _ from 'lodash';
 
 import {
   ServerNetworkError,
@@ -16,7 +15,6 @@ export const createNetworkErrorHandlerInterceptor = (axiosInstance: AxiosInstanc
   return axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
-      console.log(error);
       let exception;
 
       if (
@@ -28,12 +26,18 @@ export const createNetworkErrorHandlerInterceptor = (axiosInstance: AxiosInstanc
       }
 
       if (_serverResponded(error)) {
-        const statusCode = _.get(error, 'response.status');
+        const statusCode = error?.response?.status;
 
         if (_serverSideError(statusCode)) {
           exception = new ServerNetworkError(statusCode, error.response.data);
         } else if (_clientSideError(statusCode)) {
           exception = new ClientNetworkError(statusCode, error.response.data);
+        } else {
+          if (_noResponseFromServer(error)) {
+            exception = new ServerNotFoundError('Server is probably offline');
+          } else {
+            exception = new Error('Something terrible happened');
+          }
         }
       } else if (_noResponseFromServer(error)) {
         exception = new ServerNotFoundError('Server is probably offline');

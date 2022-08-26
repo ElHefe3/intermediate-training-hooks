@@ -1,9 +1,10 @@
-import * as Yup from 'yup';
+import z from 'zod';
 
 import { commonValidations } from '@project/validators';
 
-export const userValidation = Yup.object({
-  firstName: Yup.string().required('First Name is required'),
-  lastName: Yup.string().required('Last Name is required'),
+export const userSchema = z.object({
+  id: z.number().optional(),
+  firstName: z.string(),
+  lastName: z.string(),
   email: commonValidations.username,
 });

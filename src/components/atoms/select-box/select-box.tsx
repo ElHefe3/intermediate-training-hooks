@@ -52,14 +52,15 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
   );
 
   const MultiValue: React.FC<MultiValueProps<any, any>> = (multiProps) => {
-    const index = _.get(multiProps, 'index', 0);
+    const index = multiProps?.index || 0;
     const { ...props } = multiProps;
 
     if (_.lt(index, maxSelect))
       return <components.MultiValue {...props}>{props.children}</components.MultiValue>;
 
     if (_.eq(index, maxSelect)) {
-      const overflow = _.get(multiProps, 'getValue')()
+      const overflow = multiProps
+        ?.getValue()
         .slice()
         .map((_item) => _item.label);
       const _label = `+ ${overflow.length} selected`;

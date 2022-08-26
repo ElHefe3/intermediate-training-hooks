@@ -1,4 +1,4 @@
-import { User } from '../../../queries';
+import { User } from '@project/components';
 
 export const userDto = (formData: User) => ({
   user: {

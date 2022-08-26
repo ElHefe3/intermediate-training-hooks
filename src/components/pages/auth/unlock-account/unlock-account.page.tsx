@@ -4,8 +4,8 @@ import { toast } from 'react-hot-toast';
 import _ from 'lodash';
 
 import { AuthLayout, FormScreenContainer, Button } from '@project/components';
-import { Logo } from '@project/assets';
 import { userAuthService } from '@project/services';
+import { Logo } from '@project/assets';
 
 export const UnlockAccountPage = () => {
   const navigate = useNavigate();

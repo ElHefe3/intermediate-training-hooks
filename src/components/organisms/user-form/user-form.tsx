@@ -1,11 +1,12 @@
 import { FormikProps } from 'formik/dist/types';
-import { useParams } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 import { Button, Form, TextField } from '@project/components';
-import { User } from '@project/queries';
 import { userService } from '@project/services';
-import { UserProps } from './types';
-import { userValidation } from './validators';
+import { User, UserProps } from './types';
+import { userSchema } from './validators';
 
 export const UserForm = ({
   initialValues,
@@ -16,14 +17,34 @@ export const UserForm = ({
   isArchived,
 }: UserProps) => {
   const { id } = useParams();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
-  const onArchive = () => {
-    return userService.archiveUser(Number(id));
+  const goBack = () => {
+    navigate(-1);
   };
 
-  const onRestore = () => {
-    return userService.restoreUser(Number(id));
-  };
+  const invalidateUsers = () => queryClient.invalidateQueries(['getUsers']).then(goBack);
+
+  const archiveMutation = useMutation(() => userService.archiveUser(Number(id)), {
+    onSuccess: () => {
+      toast.success('User archived');
+      return invalidateUsers();
+    },
+    onError: () => toast.error('Failed to archive'),
+  });
+
+  const restoreMutation = useMutation(() => userService.restoreUser(Number(id)), {
+    onSuccess: () => {
+      toast.success('User restored');
+      return invalidateUsers();
+    },
+    onError: () => toast.error('Failed to restore'),
+  });
+
+  const onArchive = () => archiveMutation.mutateAsync();
+
+  const onRestore = () => restoreMutation.mutateAsync();
 
   const FormComponent = ({ isSubmitting, handleSubmit }: FormikProps<User>) => (
     <div className="space-y-4">
@@ -57,7 +78,7 @@ export const UserForm = ({
       submitForm={submitForm}
       onSuccess={onSuccess}
       onFailure={onFailure}
-      validationSchema={userValidation}
+      validationSchema={userSchema}
       render={FormComponent}
     />
   );

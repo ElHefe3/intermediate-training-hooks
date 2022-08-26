@@ -1,5 +1,6 @@
 import { Formik, FormikHelpers, FormikProps } from 'formik';
 import { toast } from 'react-hot-toast';
+import { toFormikValidationSchema } from 'zod-formik-adapter';
 import _ from 'lodash';
 
 import { FormProps, ErrorObject } from './types';
@@ -16,7 +17,7 @@ export const Form = <T extends Record<string, unknown>>({
     error: ErrorObject<typeof initialValues>,
     actions: FormikHelpers<typeof initialValues>,
   ) => {
-    const apiErrors = _.get(error, 'errors');
+    const apiErrors = error?.errors;
     if (!_.isEmpty(apiErrors)) {
       actions.setErrors(apiErrors);
     } else {
@@ -28,10 +29,12 @@ export const Form = <T extends Record<string, unknown>>({
     formData: typeof initialValues,
     actions: FormikHelpers<typeof initialValues>,
   ) => {
-    submitForm(formData)
+    submitForm(formData, actions)
       .then(() => {
         actions.setSubmitting(false);
-        onSuccess();
+        if (onSuccess) {
+          onSuccess();
+        }
       })
       .catch((error: ErrorObject<typeof initialValues>) => {
         actions.setSubmitting(false);
@@ -56,7 +59,7 @@ export const Form = <T extends Record<string, unknown>>({
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={toFormikValidationSchema(validationSchema)}
       validateOnBlur
       validateOnChange={false}
       onSubmit={_handleSubmission}

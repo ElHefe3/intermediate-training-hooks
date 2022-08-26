@@ -1,13 +1,13 @@
-import { PaginationData } from '@project/types';
+import { User } from '@project/components';
+import { UserApi } from '@project/services';
+import { Pagination, PaginationApi } from '@project/types';
 
-export type User = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
+export type UserDataApi = {
+  users: UserApi[];
+  meta: PaginationApi;
 };
 
 export type UserData = {
   users: User[];
-  pagination: PaginationData;
+  pagination: Pagination;
 };
