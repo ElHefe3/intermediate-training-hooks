@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import z from 'zod';
 
-import { paginationApiSchema, paginationSchema } from '@project/validators';
+import { paginationApiSchema, paginationSchema } from '@project/schemas';
 
 export type ChildrenProps = {
   children: ReactNode;

@@ -1,6 +1,6 @@
 import z from 'zod';
 
-export const commonValidations = {
+export const commonSchemas = {
   username: z.string().email('Must be a valid email'),
   password: z
     .string()

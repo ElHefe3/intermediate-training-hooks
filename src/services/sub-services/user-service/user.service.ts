@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 import { User } from '@project/components';
 import { authNetworkService } from '@project/services';
 import { getData } from '@project/services/utils';
-import { userApiSchema, usersApiSchema } from './validations';
+import { userApiSchema, usersApiSchema } from './schemas';
 import { userDto } from './user.dto';
 import userUrls from './user.urls';
 

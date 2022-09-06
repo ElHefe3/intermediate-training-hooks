@@ -8,7 +8,7 @@ import { Button, ErrorObject, Form } from '@project/components/atoms';
 import { TextField } from '@project/components/molecules';
 import { userAuthService } from '@project/services';
 import { ResetPasswordValuesProps } from './types';
-import { resetPasswordValidation } from './validators';
+import { resetPasswordSchema } from './schemas';
 
 export const ResetPasswordForm = () => {
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ export const ResetPasswordForm = () => {
     <Form
       initialValues={initialValues}
       submitForm={onSubmit}
-      validationSchema={resetPasswordValidation}
+      validationSchema={resetPasswordSchema}
       render={FormComponents}
     />
   );

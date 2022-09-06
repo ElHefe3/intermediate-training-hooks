@@ -1,7 +1,7 @@
 import z from 'zod';
 
 import { BaseFormProps } from '@project/components';
-import { userSchema } from './validators';
+import { userSchema } from './schemas';
 
 export type User = z.infer<typeof userSchema>;
 
