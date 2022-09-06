@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 
 import { FormBodyContainer, TextField, Button, Form, ErrorObject } from '@project/components';
 import { userAuthService } from '@project/services';
-import { forgotPasswordValidation } from './validators';
+import { forgotPasswordSchema } from './schemas';
 import { ForgotPasswordValuesProps } from './types';
 
 export const ForgotPasswordForm: React.FC = () => {
@@ -50,7 +50,7 @@ export const ForgotPasswordForm: React.FC = () => {
     <Form
       initialValues={initialValues}
       submitForm={submitForm}
-      validationSchema={forgotPasswordValidation}
+      validationSchema={forgotPasswordSchema}
       render={FormComponents}
     />
   );

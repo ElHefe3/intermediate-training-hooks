@@ -1,11 +1,11 @@
 import z from 'zod';
 
-import { commonValidations } from '@project/validators';
+import { commonSchemas } from '@project/schemas';
 
-export const resetPasswordValidation = z
+export const resetPasswordSchema = z
   .object({
-    password: commonValidations.password,
-    confirmPassword: commonValidations.password,
+    password: commonSchemas.password,
+    confirmPassword: commonSchemas.password,
     token: z.string().nullish(),
   })
   .refine(({ password, confirmPassword }) => password === confirmPassword, {

@@ -1,11 +1,11 @@
 import z from 'zod';
-import { commonValidations, paginationApiSchema } from '../../../validators';
+import { commonSchemas, paginationApiSchema } from '../../../schemas';
 
 export const userApiSchema = z.object({
   id: z.number(),
   first_name: z.string(),
   last_name: z.string(),
-  email: commonValidations.username,
+  email: commonSchemas.username,
 });
 
 export const usersApiSchema = z.object({

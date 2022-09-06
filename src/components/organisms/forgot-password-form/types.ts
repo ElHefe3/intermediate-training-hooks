@@ -1,5 +1,5 @@
 import z from 'zod';
 
-import { forgotPasswordValidation } from './validators';
+import { forgotPasswordSchema } from './schemas';
 
-export type ForgotPasswordValuesProps = z.infer<typeof forgotPasswordValidation>;
+export type ForgotPasswordValuesProps = z.infer<typeof forgotPasswordSchema>;

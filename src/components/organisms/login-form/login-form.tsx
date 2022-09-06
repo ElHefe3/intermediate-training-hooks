@@ -9,7 +9,7 @@ import { TextField, Form, Button, ErrorObject, Checkbox } from '@project/compone
 import { localStorageService, userAuthService } from '@project/services';
 import config from '@project/config';
 import { LoginValuesProps, RouteState } from './types';
-import { loginValidation } from './validators';
+import { loginSchema } from './schemas';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
@@ -97,7 +97,8 @@ export const LoginForm = () => {
     <Form
       initialValues={initialValues}
       submitForm={submitForm}
-      validationSchema={loginValidation}
+      onFailure={() => null}
+      validationSchema={loginSchema}
       render={FormComponents}
     />
   );

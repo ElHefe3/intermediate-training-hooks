@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import { Button, Form, TextField } from '@project/components';
 import { userService } from '@project/services';
 import { User, UserProps } from './types';
-import { userSchema } from './validators';
+import { userSchema } from './schemas';
 
 export const UserForm = ({
   initialValues,
