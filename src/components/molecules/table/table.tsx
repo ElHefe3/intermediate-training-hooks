@@ -38,7 +38,7 @@ export const Table = <T extends Record<string, unknown>>({
                   <th key={header.id} colSpan={header.colSpan} className="capitalize p-2">
                     {header.isPlaceholder
                       ? null
-                      : flexRender(header.column.columnDef.footer, header.getContext())}
+                      : flexRender(header.column.columnDef.header, header.getContext())}
                   </th>
                 ))}
               </tr>

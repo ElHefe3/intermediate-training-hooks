@@ -7,8 +7,9 @@ import {
 } from '@project/components';
 import { networkService } from '@project/services';
 import { rejectPromise } from '@project/services/utils';
-import { userAuthUtils, userAuthUrls } from '../user-auth-service';
 import { forgotPasswordDTO, resetPasswordDTO, unlockDTO } from './user-auth.dto';
+import userAuthUtils from './user-auth.utils';
+import userAuthUrls from './user-auth.urls';
 
 const login = (formData: LoginValuesProps) => {
   const loginUrl = userAuthUrls.tokenUrl();
