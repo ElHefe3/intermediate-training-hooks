@@ -11,3 +11,11 @@ Then run to get the project running:
 ```
 yarn dev
 ```
+
+################################################################
+HEROKU SETUP
+################################################################
+1) Setup buildpack for vite
+    run `heroku buildpacks:add --index 1 https://github.com/heroku/heroku-buildpack-nginx.git`
+
+2) make sure `static.json` file exists
