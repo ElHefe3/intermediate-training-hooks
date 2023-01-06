@@ -11,7 +11,8 @@
     "lint": "yarn lint:format && yarn lint:fix ",
     "type-check": "tsc",
     "tailwind": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "prepare": "husky install"
+    "prepare": "husky install && husky set .husky/pre-commit \"yarn pre-commit\"",
+    "pre-commit": "lint-staged && yarn build"
   },
   "dependencies": {
     "@headlessui/react": "1.6.6",
@@ -66,10 +67,5 @@
     "src/**/*.{js,ts,jsx,tsx}": [
       "eslint --fix --max-warnings=0"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
