@@ -32,3 +32,5 @@ cache
 .env.test.local
 .env.production
 .env.production.local
+
+.husky
