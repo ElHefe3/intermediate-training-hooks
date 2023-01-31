@@ -17,7 +17,7 @@ const authNetworkService = ax.create({
   timeout: 5000,
   headers: {
     Accept: 'application/json',
-    'content-type': 'application/json',
+    'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
   },
   responseType: 'json',
