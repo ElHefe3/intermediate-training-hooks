@@ -21,6 +21,8 @@ const authNetworkService = ax.create({
     'Access-Control-Allow-Origin': '*',
   },
   responseType: 'json',
+  // uncomment for C# backends
+  // paramsSerializer: {indexes: null}
 });
 
 const refreshTokenLogic = () => {
