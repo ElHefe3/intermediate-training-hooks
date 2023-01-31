@@ -8,6 +8,8 @@ const axios = ax.create({
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
     responseType: 'json',
+    // uncomment for C# backends
+    // paramsSerializer: {indexes: null}
   },
 });
 
