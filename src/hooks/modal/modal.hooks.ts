@@ -1,22 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useModal } from '@codehesion-za/headless';
 
 import { CentreModal, SideModal } from '@project/components';
-import { useModalReturn, useCentreModalReturn, useQueryModalReturn } from './types';
-
-export const useModal = (isOpen?: boolean): useModalReturn => {
-  const [_isOpen, setIsOpen] = useState(isOpen || false);
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  return [_isOpen, closeModal, openModal];
-};
+import { useCentreModalReturn, useQueryModalReturn } from './types';
 
 export const useCentreModal = (isOpen?: boolean): useCentreModalReturn => {
   const [_isOpen, closeModal, openModal] = useModal(isOpen);

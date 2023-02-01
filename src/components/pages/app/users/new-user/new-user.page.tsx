@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
+import type { ErrorObject } from '@codehesion-za/headless';
 
-import { UserForm, User, ErrorObject } from '@project/components';
+import { UserForm, User } from '@project/components';
 import { useSideModal } from '@project/hooks';
 import { userModel } from '@project/queries';
 import { userService } from '@project/services';
@@ -37,7 +38,7 @@ export const NewUserPage = () => {
   return (
     <SideModal isOpen={isOpen} onClose={closeModal} afterClose={goBack}>
       <h1 className="text-3xl pb-2">New User</h1>
-      <UserForm initialValues={initialValues} submitForm={submitForm} />
+      <UserForm initialValues={initialValues} onSubmitForm={submitForm} />
     </SideModal>
   );
 };

@@ -1,21 +1,13 @@
 import React from 'react';
-import { useField } from 'formik';
+import { TextInput, FormError, TextInputProps } from '@codehesion-za/headless';
 
-import { FormikError } from '@project/components';
-import { TextFieldProps } from './type';
-
-export const TextField: React.FC<TextFieldProps> = ({
+export const TextField: React.FC<TextInputProps> = ({
   name,
   label,
-  placeholder,
-  type,
   required,
   errorText,
-  value,
-  onChange,
+  ...rest
 }) => {
-  const [fieldProps] = useField({ name, required, type, value, onChange });
-
   const Required = () => (required ? <span> *</span> : null);
 
   return (
@@ -24,8 +16,8 @@ export const TextField: React.FC<TextFieldProps> = ({
         {label}
         <Required />
       </label>
-      <input {...fieldProps} id={name} type={type} placeholder={placeholder} required={required} />
-      <FormikError name={name} errorText={errorText} />
+      <TextInput name={name} {...rest} />
+      <FormError name={name} errorText={errorText} />
     </div>
   );
 };
