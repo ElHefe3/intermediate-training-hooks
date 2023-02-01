@@ -2,15 +2,16 @@ import { FormikProps } from 'formik/dist/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import { Form } from '@codehesion-za/headless';
 
-import { Button, Form, TextField } from '@project/components';
+import { Button, TextField } from '@project/components';
 import { userService } from '@project/services';
 import { User, UserProps } from './types';
 import { userSchema } from './schemas';
 
 export const UserForm = ({
   initialValues,
-  submitForm,
+  onSubmitForm,
   onSuccess,
   onFailure,
   isEdit,
@@ -51,21 +52,16 @@ export const UserForm = ({
       <TextField name="firstName" label="First Name" type="text" />
       <TextField name="lastName" label="Last Name" type="text" />
       <TextField name="email" label="Email" type="email" />
-      <Button
-        type="submit"
-        isLoading={isSubmitting}
-        onClick={handleSubmit}
-        className="submit-button"
-      >
+      <Button type="submit" isLoading={isSubmitting} onClick={handleSubmit} style="submit-button">
         {isEdit ? 'Update' : 'Create'}
       </Button>
       {isEdit && !isArchived ? (
-        <Button type="button" onClick={onArchive} className="submit-button">
+        <Button type="button" onClick={onArchive} style="submit-button">
           Archive
         </Button>
       ) : null}
       {isEdit && isArchived ? (
-        <Button type="button" onClick={onRestore} className="submit-button">
+        <Button type="button" onClick={onRestore} style="submit-button">
           Restore
         </Button>
       ) : null}
@@ -75,7 +71,7 @@ export const UserForm = ({
   return (
     <Form
       initialValues={initialValues}
-      submitForm={submitForm}
+      onSubmitForm={onSubmitForm}
       onSuccess={onSuccess}
       onFailure={onFailure}
       validationSchema={userSchema}

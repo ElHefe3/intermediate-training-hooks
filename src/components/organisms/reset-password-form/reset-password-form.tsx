@@ -3,14 +3,15 @@ import { FormikProps } from 'formik/dist/types';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
+import { Form, ErrorObject } from '@codehesion-za/headless';
 
-import { Button, ErrorObject, Form } from '@project/components/atoms';
+import { Button } from '@project/components/atoms';
 import { TextField } from '@project/components/molecules';
 import { userAuthService } from '@project/services';
 import { ResetPasswordValuesProps } from './types';
 import { resetPasswordSchema } from './schemas';
 
-export const ResetPasswordForm = () => {
+export const ResetPasswordForm: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -44,12 +45,7 @@ export const ResetPasswordForm = () => {
     <div className="auth-form-body">
       <TextField name="password" label="Password" type="password" />
       <TextField name="confirmPassword" label="Confirm Password" type="password" />
-      <Button
-        type="submit"
-        isLoading={isSubmitting}
-        onClick={handleSubmit}
-        className="submit-button"
-      >
+      <Button type="submit" isLoading={isSubmitting} onClick={handleSubmit} style="submit-button">
         Reset Password
       </Button>
     </div>
@@ -58,7 +54,7 @@ export const ResetPasswordForm = () => {
   return (
     <Form
       initialValues={initialValues}
-      submitForm={onSubmit}
+      onSubmitForm={onSubmit}
       validationSchema={resetPasswordSchema}
       render={FormComponents}
     />

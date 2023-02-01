@@ -1,8 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
+import { ErrorObject } from '@codehesion-za/headless';
 
-import { ErrorObject, User, UserForm } from '@project/components';
+import { User, UserForm } from '@project/components';
 import { useSideModal } from '@project/hooks';
 import { userModel, useUserQuery } from '@project/queries';
 import { userService } from '@project/services';
@@ -42,7 +43,7 @@ export const EditUserPage = ({ isArchived }: EditUserPageProps) => {
       <h1 className="text-3xl pb-2">Edit User</h1>
       <UserForm
         initialValues={initialValues}
-        submitForm={submitForm}
+        onSubmitForm={submitForm}
         isEdit
         isArchived={isArchived}
       />

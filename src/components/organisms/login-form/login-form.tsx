@@ -3,9 +3,10 @@ import { FormikProps } from 'formik/dist/types';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
+import { Form, ErrorObject, Checkbox } from '@codehesion-za/headless';
 import _ from 'lodash';
 
-import { TextField, Form, Button, ErrorObject, Checkbox } from '@project/components';
+import { Button, TextField } from '@project/components';
 import { localStorageService, userAuthService } from '@project/services';
 import config from '@project/config';
 import { LoginValuesProps, RouteState } from './types';
@@ -75,19 +76,19 @@ export const LoginForm = () => {
       <TextField name="password" label="Password" type="password" />
       <div className="flex justify-between">
         <label htmlFor="remember" className="space-x-2 flex items-center">
-          <Checkbox name="remember" checked={values.remember} onChange={handleChange('remember')} />
+          <Checkbox
+            name="remember"
+            value="t"
+            checked={values.remember}
+            onChange={handleChange('remember')}
+          />
           <span>Remember me</span>
         </label>
         <Button variant="text" onClick={onForgotPasswordClick}>
           Forgot Password
         </Button>
       </div>
-      <Button
-        type="submit"
-        isLoading={isSubmitting}
-        onClick={handleSubmit}
-        className="submit-button"
-      >
+      <Button type="submit" isLoading={isSubmitting} onClick={handleSubmit} style="submit-button">
         Login
       </Button>
     </div>
@@ -96,10 +97,10 @@ export const LoginForm = () => {
   return (
     <Form
       initialValues={initialValues}
-      submitForm={submitForm}
+      onSubmitForm={submitForm}
       onFailure={() => null}
-      validationSchema={loginSchema}
       render={FormComponents}
+      validationSchema={loginSchema}
     />
   );
 };

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
+import { ErrorObject } from '@codehesion-za/headless';
 
-import { ErrorObject } from '@project/components';
 import { useLogout } from '@project/hooks';
 import { userService } from '@project/services';
 

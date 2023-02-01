@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import _ from 'lodash';
 
-import { AuthLayout, FormScreenContainer, Button } from '@project/components';
+import { FormScreenContainer, Button } from '@project/components';
 import { userAuthService } from '@project/services';
 import { Logo } from '@project/assets';
 
@@ -46,14 +46,12 @@ export const UnlockAccountPage = () => {
   }, []);
 
   return (
-    <AuthLayout>
-      <FormScreenContainer>
-        <img src={Logo} alt="logo" className="auth-image" />
-        <p className="auth-sub-heading">{message}</p>
-        <Button onClick={onBackToLogin} variant="text" className="w-40 self-center mt-5">
-          Back to log in
-        </Button>
-      </FormScreenContainer>
-    </AuthLayout>
+    <FormScreenContainer>
+      <img src={Logo} alt="logo" className="auth-image" />
+      <p className="auth-sub-heading">{message}</p>
+      <Button onClick={onBackToLogin} variant="text" style="w-40 self-center mt-5">
+        Back to log in
+      </Button>
+    </FormScreenContainer>
   );
 };

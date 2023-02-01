@@ -7,7 +7,7 @@ stages:
 build-job:
   stage: build
   script:
-    - yarn install --ignore-scripts
+    - yarn install --ignore-scripts --ignore-engines
     - yarn lint
     - yarn build
   only:

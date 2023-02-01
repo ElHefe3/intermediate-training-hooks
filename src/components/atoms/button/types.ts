@@ -1,10 +1,5 @@
-import { ChildrenProps } from '@project/types';
+import { ButtonProps } from '@codehesion-za/headless';
 
-export interface ButtonProps extends ChildrenProps {
-  type?: 'button' | 'submit' | 'reset' | undefined;
+export interface ButtonPropsType extends ButtonProps {
   variant?: 'text' | 'outlined' | 'contained';
-  isLoading?: boolean;
-  isDisabled?: boolean;
-  onClick: (arg0: any) => void;
-  className?: string;
 }
