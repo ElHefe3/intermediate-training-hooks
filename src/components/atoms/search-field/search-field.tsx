@@ -17,7 +17,7 @@ export const SearchField: React.FC<SearchFieldProps> = ({ placeholder, onChange 
   };
 
   return (
-    <div className="flex mb-1">
+    <div className="mb-1 flex">
       <input
         value={search}
         placeholder={placeholder}

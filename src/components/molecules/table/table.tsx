@@ -29,13 +29,13 @@ export const Table = <T extends Record<string, unknown>>({
 
   return (
     <div>
-      <div className="border border-gray-300 rounded-lg">
-        <table className="table-auto min-w-full text-left divide-y divide-gray-300">
+      <div className="rounded-lg border border-gray-300">
+        <table className="min-w-full table-auto divide-y divide-gray-300 text-left">
           <thead>
             {instance.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <th key={header.id} colSpan={header.colSpan} className="capitalize p-2">
+                  <th key={header.id} colSpan={header.colSpan} className="p-2 capitalize">
                     {header.isPlaceholder
                       ? null
                       : flexRender(header.column.columnDef.header, header.getContext())}
@@ -60,28 +60,28 @@ export const Table = <T extends Record<string, unknown>>({
       <div className="h-2" />
       <div className="flex items-center gap-2">
         <button
-          className="border rounded p-1 px-2"
+          className="rounded border p-1 px-2"
           onClick={() => instance.setPageIndex(0)}
           disabled={!instance.getCanPreviousPage() || isLoading}
         >
           {'<<'}
         </button>
         <button
-          className="border rounded p-1 px-2"
+          className="rounded border p-1 px-2"
           onClick={instance.previousPage}
           disabled={!instance.getCanPreviousPage() || isLoading}
         >
           {'<'}
         </button>
         <button
-          className="border rounded p-1 px-2"
+          className="rounded border p-1 px-2"
           onClick={instance.nextPage}
           disabled={!instance.getCanNextPage() || isLoading}
         >
           {'>'}
         </button>
         <button
-          className="border rounded p-1 px-2"
+          className="rounded border p-1 px-2"
           onClick={() => instance.setPageIndex(instance.getPageCount() - 1)}
           disabled={!instance.getCanNextPage() || isLoading}
         >
@@ -102,7 +102,7 @@ export const Table = <T extends Record<string, unknown>>({
               const page = e.target.value ? Number(e.target.value) - 1 : 0;
               instance.setPageIndex(page);
             }}
-            className="border border-gray-200 p-1 rounded w-16"
+            className="w-16 rounded border border-gray-200 p-1"
             disabled={isLoading}
           />
         </span>
