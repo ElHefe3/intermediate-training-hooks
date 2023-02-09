@@ -40,7 +40,7 @@ export const EditUserPage = ({ isArchived }: EditUserPageProps) => {
 
   return (
     <SideModal isOpen={isOpen} onClose={closeModal} afterClose={goBack}>
-      <h1 className="text-3xl pb-2">Edit User</h1>
+      <h1 className="pb-2 text-3xl">Edit User</h1>
       <UserForm
         initialValues={initialValues}
         onSubmitForm={submitForm}

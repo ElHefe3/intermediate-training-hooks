@@ -75,7 +75,7 @@ export const LoginForm = () => {
       <TextField name="username" label="Email" type="email" />
       <TextField name="password" label="Password" type="password" />
       <div className="flex justify-between">
-        <label htmlFor="remember" className="space-x-2 flex items-center">
+        <label htmlFor="remember" className="flex items-center space-x-2">
           <Checkbox
             name="remember"
             value="t"

@@ -29,7 +29,7 @@ export const SideModal: React.FC<ModalProps> = ({ children, isOpen, onClose, aft
             leaveFrom="opacity-100 w-full"
             leaveTo="opacity-0 w-0"
           >
-            <Dialog.Panel className="w-full h-full max-w-2xl transform overflow-hidden rounded-l-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+            <Dialog.Panel className="h-full w-full max-w-2xl transform overflow-hidden rounded-l-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
               {children}
             </Dialog.Panel>
           </Transition.Child>

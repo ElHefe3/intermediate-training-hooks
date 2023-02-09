@@ -63,7 +63,7 @@ export const UsersPage = ({ isArchived }: UserPageProps) => {
   };
 
   return (
-    <div className="p-2 space-y-2">
+    <div className="space-y-2 p-2">
       <h1 className="text-3xl">{isArchived && 'Archived '}Users</h1>
       {!isArchived && <Button onClick={onNewUser}>New User</Button>}
       <Table

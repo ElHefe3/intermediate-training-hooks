@@ -67,7 +67,7 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
 
       return (
         <div
-          className="bg-gray-200 ml-auto p-1 order-last rounded-sm text-xs"
+          className="order-last ml-auto rounded-sm bg-gray-200 p-1 text-xs"
           title={overflow.join(', ')}
         >
           {_label}
@@ -108,7 +108,7 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
           />
         )}
       </div>
-      <div className="text-danger text-xs mt-1">{error}</div>
+      <div className="text-danger mt-1 text-xs">{error}</div>
     </>
   );
 };

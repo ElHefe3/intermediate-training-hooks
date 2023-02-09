@@ -92,7 +92,7 @@ export const Drawer = () => {
     if (hasSubItems) {
       return (
         <div key={name}>
-          <div onClick={handleClick} className="flex justify-between items-center mx-4 py-3">
+          <div onClick={handleClick} className="mx-4 flex items-center justify-between py-3">
             <div className="flex items-center space-x-4">
               {icon}
               <span>{name}</span>
@@ -130,7 +130,7 @@ export const Drawer = () => {
       <NavLink key={name} to={link}>
         <div className={isActive || activeChild ? 'active-drawer-item' : ''}>
           <div
-            className={`flex justify-between items-center mx-4 py-3 ${
+            className={`mx-4 flex items-center justify-between py-3 ${
               isActive || activeChild ? 'ml-2' : ''
             }`}
           >
@@ -147,7 +147,7 @@ export const Drawer = () => {
 
   return (
     <div className="h-screen w-64 bg-drawer">
-      <div className="flex h-16 bg-white items-center justify-center">
+      <div className="flex h-16 items-center justify-center bg-white">
         <img src={Logo} alt="logo" className="w-36" />
       </div>
       <div className="flex text-white">

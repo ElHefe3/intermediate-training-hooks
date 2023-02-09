@@ -3,7 +3,7 @@
 }
 
 .auth-sub-heading {
-  @apply py-8 text-gray-800 opacity-50 self-center;
+  @apply self-center py-8 text-gray-800 opacity-50;
 }
 
 .auth-form-body {
@@ -11,5 +11,5 @@
 }
 
 .submit-button {
-  @apply w-full bg-blue-400 text-white py-3 text-base;
+  @apply w-full bg-blue-400 py-3 text-base text-white;
 }
