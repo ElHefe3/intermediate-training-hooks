@@ -1,4 +1,4 @@
-image: node:14.19.3-alpine3.16
+image: node:16.19.0-slim
 
 stages:
   - build
