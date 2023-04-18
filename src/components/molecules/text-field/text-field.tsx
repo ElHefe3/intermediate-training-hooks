@@ -1,7 +1,9 @@
 import React from 'react';
-import { TextInput, FormError, TextInputProps } from '@codehesion-za/headless';
+import { TextInput, FormError } from '@codehesion-za/headless';
 
-export const TextField: React.FC<TextInputProps> = ({
+import { TextInputPropsType } from './types';
+
+export const TextField: React.FC<TextInputPropsType> = ({
   name,
   label,
   required,

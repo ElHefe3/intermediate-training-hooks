@@ -15,6 +15,7 @@ export const Table = <T extends Record<string, unknown>>({
   paginationSizeOptions = [10, 20, 30, 40, 50],
   pagination,
   setPagination,
+  pageCount = 1,
 }: TableProps<T>) => {
   const instance = useReactTable({
     data: data,
@@ -25,6 +26,7 @@ export const Table = <T extends Record<string, unknown>>({
     },
     onPaginationChange: setPagination,
     getPaginationRowModel: getPaginationRowModel(),
+    pageCount: pageCount,
   });
 
   return (
