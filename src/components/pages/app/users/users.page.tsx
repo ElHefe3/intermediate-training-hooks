@@ -3,14 +3,19 @@ import { createColumnHelper } from '@tanstack/react-table';
 import _ from 'lodash';
 
 import { Button, Table, User } from '@project/components';
-import { useUsersData, usePagination } from '@project/hooks';
+import { usePagination } from '@project/hooks';
 import { UserPageProps } from './types';
+import { useUsersQuery } from '@project/queries';
 
 export const UsersPage = ({ isArchived }: UserPageProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { data, isLoading } = useUsersData(isArchived);
-  const [pagination, setPagination] = usePagination(data?.pagination?.currentPage);
+  const [pagination, setPagination] = usePagination();
+  const { data, isLoading } = useUsersQuery(
+    pagination.pageIndex,
+    pagination.pageSize,
+    isArchived || false,
+  );
   const columnHelper = createColumnHelper<User>();
 
   const onEdit = (id: number) => {
@@ -68,10 +73,11 @@ export const UsersPage = ({ isArchived }: UserPageProps) => {
       {!isArchived && <Button onClick={onNewUser}>New User</Button>}
       <Table
         columns={columns}
-        data={data.users}
+        data={data?.users || []}
+        isLoading={isLoading}
         pagination={pagination}
         setPagination={setPagination}
-        isLoading={isLoading}
+        pageCount={data?.pagination?.totalPages}
       />
     </div>
   );

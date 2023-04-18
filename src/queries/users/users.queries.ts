@@ -3,9 +3,16 @@ import { ErrorObject } from '@codehesion-za/headless';
 
 import { useLogout } from '@project/hooks';
 import { userService } from '@project/services';
+import { userDataModel } from '@project/queries';
 
-export const useUsersQuery = (page: number, getArchived: boolean) =>
-  useQuery(['getUsers', page, getArchived], () => userService.getUsers(page, getArchived));
+export const useUsersQuery = (page: number, per: number, getArchived: boolean) =>
+  useQuery(
+    ['getUsers', page, per, getArchived],
+    () => userService.getUsers(page, per, getArchived),
+    {
+      select: userDataModel,
+    },
+  );
 
 export const useUserQuery = (id: number) =>
   useQuery(['getUser', id], () => userService.getUser(id));

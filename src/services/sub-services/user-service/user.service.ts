@@ -13,8 +13,10 @@ const getCurrentUser = () => {
   return authNetworkService.get(url).then(getData);
 };
 
-const getUsers = (page: number, getArchived: boolean) => {
-  const url = getArchived ? userUrls.getArchivedUsersUrl(page) : userUrls.getUsersUrl(page);
+const getUsers = (page: number, per: number, getArchived: boolean) => {
+  const url = getArchived
+    ? userUrls.getArchivedUsersUrl(page, per)
+    : userUrls.getUsersUrl(page, per);
 
   return authNetworkService
     .get(url)

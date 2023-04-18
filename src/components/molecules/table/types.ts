@@ -8,4 +8,5 @@ export type TableProps<Value> = {
   paginationSizeOptions?: number[];
   pagination: PaginationState;
   setPagination: React.Dispatch<React.SetStateAction<PaginationState>>;
+  pageCount?: number;
 };
