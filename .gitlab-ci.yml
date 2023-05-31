@@ -2,6 +2,7 @@ image: node:16.19.0-slim
 
 stages:
   - build
+  - test
   - deploy
 
 build-job:
@@ -10,6 +11,15 @@ build-job:
     - yarn install --ignore-scripts --ignore-engines
     - yarn lint
     - yarn build
+  only:
+    - merge_requests
+
+test-job:
+  stage: test
+  before_script:
+    - yarn install --ignore-scripts --ignore-engines
+  script:
+    - yarn test
   only:
     - merge_requests
 
