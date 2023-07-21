@@ -45,6 +45,7 @@ export const createNetworkErrorHandlerInterceptor = (axiosInstance: AxiosInstanc
         exception = new Error('Something terrible happened');
       }
 
+      // eslint-disable-next-line no-console
       console.warn(exception);
       return Promise.reject(exception);
     },
