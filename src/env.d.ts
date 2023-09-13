@@ -7,6 +7,9 @@ interface ImportMetaEnv {
   readonly VITE_CLIENT_ID: string;
   readonly VITE_CLIENT_SECRET: string;
   readonly VITE_CLIENT_SCOPE: string;
+  readonly CYPRESS_BASE_URL: string;
+  readonly CYPRESS_USERNAME: string;
+  readonly CYPRESS_PASSWORD: string;
 }
 
 interface ImportMeta {

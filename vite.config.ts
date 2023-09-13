@@ -9,4 +9,7 @@ export default defineConfig({
       '@project': `${__dirname}/src`,
     },
   },
+  server: {
+    port: 3001,
+  },
 });
