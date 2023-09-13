@@ -1,5 +1,5 @@
 import { ChildrenProps } from '@project/types';
 
-export interface LoadingContainerProps extends ChildrenProps {
+export type LoadingContainerProps = {
   isLoading: boolean;
-}
+} & ChildrenProps;

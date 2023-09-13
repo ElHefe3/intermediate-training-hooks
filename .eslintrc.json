@@ -5,8 +5,8 @@
   },
   "extends": [
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked",
     "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
@@ -15,7 +15,8 @@
       "jsx": true
     },
     "ecmaVersion": 12,
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": true
   },
   "plugins": ["react", "@typescript-eslint", "import"],
   "settings": {
@@ -48,6 +49,13 @@
     "@typescript-eslint/explicit-module-boundary-types": ["off"],
     "@typescript-eslint/explicit-function-return-type": "off",
     "no-param-reassign": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": false
+      }
+    ],
+    "@typescript-eslint/consistent-type-definitions": "off"
   }
 }

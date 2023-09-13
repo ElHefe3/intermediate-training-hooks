@@ -12,7 +12,7 @@ const Router = () => {
 
   return useRoutes(
     _.concat(AuthRouter, AppRouter, GlobalRouter),
-    state?.backgroundLocation || location,
+    state?.backgroundLocation ?? location,
   );
 };
 

@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { accessTokenOperations, refreshTokenOperations } from '@project/services';
 import { OAuthRefreshObject } from '@project/services/sub-services/user-auth-service';
 import appConfig from '@project/config';

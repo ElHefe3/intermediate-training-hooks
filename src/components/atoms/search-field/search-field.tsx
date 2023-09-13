@@ -11,7 +11,7 @@ export const SearchField: React.FC<SearchFieldProps> = ({ placeholder, onChange 
     [],
   );
 
-  const onSearchChange = (e: ChangeEvent<any>) => {
+  const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
     validateInputDebounce(e.target.value);
   };

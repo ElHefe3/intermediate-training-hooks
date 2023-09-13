@@ -51,7 +51,14 @@ export const UserForm = ({
     <div className="space-y-4">
       <TextField name="firstName" label="First Name" type="text" />
       <TextField name="lastName" label="Last Name" type="text" />
-      <TextField name="email" label="Email" type="email" />
+      <TextField name="email" label="Email" type="email" autoComplete="username" />
+      <TextField name="password" label="Password" type="password" autoComplete="new-password" />
+      <TextField
+        name="confirmPassword"
+        label="Confirm Password"
+        type="password"
+        autoComplete="new-password"
+      />
       <Button type="submit" isLoading={isSubmitting} onClick={handleSubmit} style="submit-button">
         {isEdit ? 'Update' : 'Create'}
       </Button>
@@ -74,7 +81,7 @@ export const UserForm = ({
       onSubmitForm={onSubmitForm}
       onSuccess={onSuccess}
       onFailure={onFailure}
-      validationSchema={userSchema}
+      validationSchema={userSchema(!isEdit)}
       render={FormComponent}
     />
   );

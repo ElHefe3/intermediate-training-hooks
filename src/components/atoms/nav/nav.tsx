@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { useNavigate } from 'react-router-dom';
 
 import { ChildrenProps } from '@project/types';
@@ -12,10 +12,9 @@ export const Nav = ({ children }: ChildrenProps) => {
 
   const { data } = useCurrentUserQuery();
 
-  const signOut = () => {
-    return userAuthService.logout().then(() => {
-      navigate('/');
-    });
+  const signOut = async () => {
+    await userAuthService.logout();
+    navigate('/');
   };
 
   const DropdownMenu = () => (
@@ -24,7 +23,7 @@ export const Nav = ({ children }: ChildrenProps) => {
         <div>
           <Menu.Button className="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
             {data?.email ?? 'Placeholder'}
-            <ChevronDownIcon className="ml-2 -mr-1 h-5 w-5" aria-hidden="true" />
+            <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
           </Menu.Button>
         </div>
         <Transition
@@ -61,7 +60,7 @@ export const Nav = ({ children }: ChildrenProps) => {
   return (
     <div className="flex h-screen w-screen flex-col">
       <DropdownMenu />
-      <div className="overflow-y-auto border-t-2">{children}</div>
+      <div className="h-full overflow-y-auto border-t-2">{children}</div>
     </div>
   );
 };

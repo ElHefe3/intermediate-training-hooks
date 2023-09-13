@@ -1,52 +1,67 @@
 import { AxiosError, AxiosInstance } from 'axios';
 
-import {
-  ServerNetworkError,
-  ClientNetworkError,
-  ServerNotFoundError,
-} from '@project/services/exceptions';
+import { ErrorObject } from './types';
+
+const serverNetworkError = (axiosError: AxiosError<unknown, unknown>): ErrorObject<unknown> => ({
+  statusCode: axiosError?.response?.status ?? 0,
+  message: axiosError?.message ?? 'Server Network Error',
+  serverError: axiosError?.response?.data ?? {},
+  axiosError,
+});
+
+const clientNetworkError = (axiosError: AxiosError<unknown, unknown>): ErrorObject<unknown> => {
+  const status = axiosError.response?.status ?? 0;
+
+  return {
+    statusCode: status,
+    message: axiosError?.message ?? `Request failed with status code ${status}`,
+    serverError: axiosError?.response?.data ?? {},
+    axiosError,
+  };
+};
+
+const serverNotFoundError = (): ErrorObject<unknown> => ({
+  statusCode: 404,
+  message: 'Server not found',
+});
+
+const unknownNetworkError = (axiosError: AxiosError): ErrorObject<unknown> => ({
+  statusCode: 0,
+  message: 'Something terrible happened',
+  axiosError,
+});
 
 export const createNetworkErrorHandlerInterceptor = (axiosInstance: AxiosInstance) => {
-  const _serverResponded = (error: AxiosError) => error.response;
+  const _serverResponded = (error: AxiosError) => error?.response ?? false;
   const _serverSideError = (statusCode: number) => statusCode >= 500;
   const _clientSideError = (statusCode: number) => statusCode >= 400;
-  const _noResponseFromServer = (error: AxiosError) => error.request;
+  const _noResponseFromServer = (error: AxiosError) => error?.request as boolean;
 
   return axiosInstance.interceptors.response.use(
-    (response) => response,
-    (error) => {
+    (request) => request,
+    (error: AxiosError<unknown, unknown>) => {
       let exception;
 
-      if (
-        error instanceof ClientNetworkError ||
-        error instanceof ServerNetworkError ||
-        error instanceof ServerNotFoundError
-      ) {
-        return Promise.reject(error);
-      }
-
       if (_serverResponded(error)) {
-        const statusCode = error?.response?.status;
+        const statusCode = error?.response?.status ?? 0;
 
         if (_serverSideError(statusCode)) {
-          exception = new ServerNetworkError(statusCode, error.response.data);
+          exception = serverNetworkError(error);
         } else if (_clientSideError(statusCode)) {
-          exception = new ClientNetworkError(statusCode, error.response.data);
+          exception = clientNetworkError(error);
         } else {
           if (_noResponseFromServer(error)) {
-            exception = new ServerNotFoundError('Server is probably offline');
+            exception = serverNotFoundError();
           } else {
-            exception = new Error('Something terrible happened');
+            exception = unknownNetworkError(error);
           }
         }
       } else if (_noResponseFromServer(error)) {
-        exception = new ServerNotFoundError('Server is probably offline');
+        exception = serverNotFoundError();
       } else {
-        exception = new Error('Something terrible happened');
+        exception = unknownNetworkError(error);
       }
 
-      // eslint-disable-next-line no-console
-      console.warn(exception);
       return Promise.reject(exception);
     },
   );

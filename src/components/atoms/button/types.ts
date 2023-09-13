@@ -1,5 +1,5 @@
 import { ButtonProps } from '@codehesion-za/headless';
 
-export interface ButtonPropsType extends ButtonProps {
+export type ButtonPropsType = {
   variant?: 'text' | 'outlined' | 'contained';
-}
+} & ButtonProps;

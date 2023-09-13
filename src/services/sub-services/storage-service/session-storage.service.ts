@@ -9,9 +9,9 @@ function setItem(key: string, value: string | object): void {
 
 function getItem(key: string): string | object | null {
   if (!_.isNil(sessionStorage.getItem(key))) {
-    const storageObjectString = sessionStorage.getItem(key) || '';
+    const storageObjectString = sessionStorage.getItem(key) ?? '';
     try {
-      return JSON.parse(storageObjectString);
+      return JSON.parse(storageObjectString) as string | object | null;
     } catch {
       return storageObjectString;
     }

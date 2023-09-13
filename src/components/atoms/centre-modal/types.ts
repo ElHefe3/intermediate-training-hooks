@@ -1,7 +1,7 @@
 import { ChildrenProps } from '@project/types';
 
-export interface ModalProps extends ChildrenProps {
+export type ModalProps = {
   isOpen?: boolean;
   onClose: () => void;
   afterClose?: () => void;
-}
+} & ChildrenProps;

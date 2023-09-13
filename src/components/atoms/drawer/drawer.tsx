@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Disclosure } from '@headlessui/react';
 import {
-  ArchiveIcon,
+  ArchiveBoxIcon,
   ChevronDownIcon,
   ChevronUpIcon,
   HomeIcon,
   UserGroupIcon,
-} from '@heroicons/react/solid';
+} from '@heroicons/react/20/solid';
 import _ from 'lodash';
 
 import { Logo } from '@project/assets';
@@ -168,7 +168,7 @@ export const Drawer = () => {
           />
           <DrawerItem
             name="Archived"
-            icon={<ArchiveIcon className="inline h-6" />}
+            icon={<ArchiveBoxIcon className="inline h-6" />}
             subItems={archivedChildren}
           />
         </div>

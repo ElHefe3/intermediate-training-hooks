@@ -6,7 +6,7 @@ export const createAttachTokenInterceptor = (
 ) => {
   const _attachAccessToken = (_config: InternalAxiosRequestConfig) => {
     const accessToken = getAccessToken();
-    _config.headers.setAuthorization(`Bearer ${accessToken}`);
+    _config.headers.setAuthorization(`Bearer ${accessToken as string}`);
 
     return _config;
   };

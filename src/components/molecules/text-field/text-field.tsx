@@ -19,7 +19,7 @@ export const TextField: React.FC<TextInputPropsType> = ({
         <Required />
       </label>
       <TextInput name={name} {...rest} />
-      <FormError name={name} errorText={errorText} />
+      <FormError name={name} errorText={errorText} className="text-red-500" />
     </div>
   );
 };

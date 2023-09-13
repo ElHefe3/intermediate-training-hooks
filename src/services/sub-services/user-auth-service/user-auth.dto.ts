@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { ForgotPasswordValuesProps, ResetPasswordValuesProps } from '@project/components';
 
 export const forgotPasswordDTO = (formData: ForgotPasswordValuesProps) => {

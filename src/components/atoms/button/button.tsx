@@ -17,12 +17,12 @@ export const Button: React.FC<ButtonPropsType> = ({
   switch (variant) {
     case 'contained':
       _className =
-        'inline-block px-6 py-2.5 bg-primary text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-600 hover:shadow-lg focus:bg-blue-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out';
+        'inline-block px-6 py-2.5 bg-primary text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-blue-600 focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out';
       _disableClassName = 'bg-gray-100 text-gray-400';
       break;
     case 'outlined':
       _className =
-        'inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out';
+        'inline-block px-6 py-2 border-2 border-primary text-primary font-medium text-xs leading-tight uppercase rounded hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out';
       _disableClassName = 'bg-gray-100 border-gray-400 text-gray-400';
       break;
     case 'text':
@@ -33,8 +33,8 @@ export const Button: React.FC<ButtonPropsType> = ({
 
   return (
     <Btn
-      className={className || _className}
-      disabledClassName={disabledClassName || _disableClassName}
+      className={className ?? _className}
+      disabledClassName={disabledClassName ?? _disableClassName}
       loader={<ActivityLoader isLoading />}
       {...rest}
     >
