@@ -14,7 +14,7 @@ export const UsersPage = ({ isArchived }: UserPageProps) => {
   const { data, isLoading } = useUsersQuery(
     pagination.pageIndex,
     pagination.pageSize,
-    isArchived || false,
+    isArchived ?? false,
   );
   const columnHelper = createColumnHelper<User>();
 
@@ -46,7 +46,7 @@ export const UsersPage = ({ isArchived }: UserPageProps) => {
     columnHelper.display({
       id: 'Actions',
       cell: ({ row }) => {
-        const { id } = row.original as User;
+        const { id } = row.original;
 
         return (
           <span>
@@ -73,7 +73,7 @@ export const UsersPage = ({ isArchived }: UserPageProps) => {
       {!isArchived && <Button onClick={onNewUser}>New User</Button>}
       <Table
         columns={columns}
-        data={data?.users || []}
+        data={data?.users ?? []}
         isLoading={isLoading}
         pagination={pagination}
         setPagination={setPagination}

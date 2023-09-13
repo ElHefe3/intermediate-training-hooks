@@ -14,12 +14,14 @@ import { loginSchema } from './schemas';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
-  const { state, search } = useLocation();
+  const location = useLocation();
+  const state = location.state as string;
+  const search = location.search;
   const [rememberEmail, setRememberEmail] = useState('');
 
   const reset = new URLSearchParams(search).get('reset');
   const unlock = new URLSearchParams(search).get('unlock');
-  const rememberMe = localStorageService.getItem(config.rememberMeKey) ?? '';
+  const rememberMe = (localStorageService.getItem(config.rememberMeKey) as string) ?? '';
 
   const initialValues = {
     username: rememberEmail,
@@ -39,7 +41,7 @@ export const LoginForm = () => {
           config.rememberMeKey,
           variables.remember ? variables.username : '',
         );
-        navigate((state as RouteState)?.from || '/');
+        navigate((state as RouteState)?.from ?? '/');
       },
       onError: (error: ErrorObject<typeof initialValues>) => {
         const message =
@@ -72,8 +74,8 @@ export const LoginForm = () => {
     handleSubmit,
   }: FormikProps<LoginValuesProps>) => (
     <div className="auth-form-body">
-      <TextField name="username" label="Email" type="email" />
-      <TextField name="password" label="Password" type="password" />
+      <TextField name="username" label="Email" type="email" autoComplete="username" />
+      <TextField name="password" label="Password" type="password" autoComplete="current-password" />
       <div className="flex justify-between">
         <label htmlFor="remember" className="flex items-center space-x-2">
           <Checkbox

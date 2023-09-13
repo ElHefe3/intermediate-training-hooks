@@ -62,7 +62,7 @@ describe('Button test suite', () => {
     const button = getByText('Click me!');
 
     expect(button).toBeTruthy();
-    expect(button.className).toContain('border-blue-600');
+    expect(button.className).toContain('border-primary');
   });
 
   test('Should render button with text variant style', () => {

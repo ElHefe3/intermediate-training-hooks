@@ -9,9 +9,9 @@ function setItem(key: string, value: string | object): void {
 
 function getItem(key: string): string | object | null {
   if (!_.isNil(localStorage.getItem(key))) {
-    const storageObjectString = localStorage.getItem(key) || '';
+    const storageObjectString = localStorage.getItem(key) ?? '';
     try {
-      return JSON.parse(storageObjectString);
+      return JSON.parse(storageObjectString) as string | object | null;
     } catch {
       return storageObjectString;
     }

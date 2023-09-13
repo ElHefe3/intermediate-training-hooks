@@ -18,20 +18,19 @@ export const NewUserPage = () => {
     navigate(-1);
   };
 
-  const { mutateAsync } = useMutation<User, ErrorObject<User>, User>((formData: User) =>
-    userService.createUser(formData),
-  );
+  const { mutateAsync } = useMutation((formData: User) => userService.createUser(formData));
 
   const submitForm = (formData: User) =>
     mutateAsync(formData, {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['getUsers']).then(() => {
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(['getUsers']).then(() => {
           toast.success('User created');
           goBack();
         });
       },
       onError: (error) => {
-        toast.error(error.message, { duration: 5000 });
+        const { message } = error as ErrorObject<typeof initialValues>;
+        toast.error(message, { duration: 5000 });
       },
     });
 

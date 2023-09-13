@@ -3,9 +3,10 @@ import z from 'zod';
 
 import { userSchema } from './schemas';
 
-export type User = z.infer<typeof userSchema>;
+const user = userSchema();
+export type User = z.infer<typeof user>;
 
-export interface UserProps extends Omit<FormProps<User>, 'validationSchema' | 'render'> {
+export type UserProps = {
   isEdit?: boolean;
   isArchived?: boolean;
-}
+} & Omit<FormProps<User>, 'validationSchema' | 'render'>;

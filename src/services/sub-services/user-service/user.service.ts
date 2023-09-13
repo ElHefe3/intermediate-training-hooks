@@ -1,8 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 import { User } from '@project/components';
-import { authNetworkService } from '@project/services';
-import { getData } from '@project/services/utils';
+import { authNetworkService, UserApi } from '@project/services';
 import { userApiSchema, usersApiSchema } from './schemas';
 import { userDto } from './user.dto';
 import userUrls from './user.urls';
@@ -10,7 +9,9 @@ import userUrls from './user.urls';
 const getCurrentUser = () => {
   const url = userUrls.getCurrentUserUrl();
 
-  return authNetworkService.get(url).then(getData);
+  return authNetworkService
+    .get(url)
+    .then((apiResponse: AxiosResponse<UserApi>) => apiResponse?.data);
 };
 
 const getUsers = (page: number, per: number, getArchived: boolean) => {
@@ -35,14 +36,14 @@ const updateUser = (id: number, formData: User) => {
   const url = userUrls.getUserUrl(id);
   const dto = userDto(formData);
 
-  return authNetworkService.patch(url, dto).then(getData);
+  return authNetworkService.patch(url, dto).then((resp: AxiosResponse<UserApi>) => resp?.data);
 };
 
 const createUser = (formData: User) => {
   const url = userUrls.getUsersUrl();
   const dto = userDto(formData);
 
-  return authNetworkService.post(url, dto).then(getData);
+  return authNetworkService.post(url, dto).then((resp: AxiosResponse<UserApi>) => resp?.data);
 };
 
 const archiveUser = (id: number) => {

@@ -22,7 +22,7 @@ export const UnlockAccountPage = () => {
   };
 
   const unlockAccount = () => {
-    const token = new URLSearchParams(location.search).get('token') as string;
+    const token = new URLSearchParams(location.search).get('token')!;
 
     if (!_.isEmpty(token)) {
       userAuthService

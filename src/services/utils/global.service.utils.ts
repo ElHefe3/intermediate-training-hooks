@@ -1,6 +1,4 @@
-import { AxiosError, AxiosResponse } from 'axios';
-
-export const getData = (apiResponse: AxiosResponse) => apiResponse?.data;
+import { AxiosError } from 'axios';
 
 export const rejectPromise = (err: AxiosError) => {
   return Promise.reject(err);
