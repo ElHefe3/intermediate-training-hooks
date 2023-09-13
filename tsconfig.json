@@ -14,12 +14,13 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "types": ["cypress", "jest"],
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
       "@project/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*", "src/**/*.test.tsx"],
+  "include": ["src/**/*", "src/**/*.test.tsx", "cypress/**/*.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
