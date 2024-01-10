@@ -86,7 +86,7 @@ export const LoginForm = () => {
           />
           <span>Remember me</span>
         </label>
-        <Button variant="text" onClick={onForgotPasswordClick}>
+        <Button type="button" variant="text" onClick={onForgotPasswordClick}>
           Forgot Password
         </Button>
       </div>
