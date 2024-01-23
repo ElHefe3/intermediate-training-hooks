@@ -1,4 +1,4 @@
-import config from '../../../config';
+import config from '@project/config';
 
 const userBaseUrl = `${config.apiUrl}/users`;
 

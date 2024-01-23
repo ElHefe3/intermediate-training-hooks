@@ -1,11 +1,12 @@
-import { FormikProps } from 'formik/dist/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
+import { FormikProps } from 'formik/dist/types';
 import { Form } from '@codehesion-za/headless';
+import { toast } from 'react-hot-toast';
 
 import { Button, TextField } from '@project/components';
 import { userService } from '@project/services';
+
 import { User, UserProps } from './types';
 import { userSchema } from './schemas';
 

@@ -1,13 +1,13 @@
-import React from 'react';
-import { FormikProps } from 'formik/dist/types';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
-import { toast } from 'react-hot-toast';
 import { Form, ErrorObject } from '@codehesion-za/headless';
+import { useMutation } from '@tanstack/react-query';
+import { FormikProps } from 'formik/dist/types';
+import { toast } from 'react-hot-toast';
+import React from 'react';
 
-import { Button } from '@project/components/atoms';
-import { TextField } from '@project/components/molecules';
+import { Button, TextField } from '@project/components/atoms';
 import { userAuthService } from '@project/services';
+
 import { ResetPasswordValuesProps } from './types';
 import { resetPasswordSchema } from './schemas';
 

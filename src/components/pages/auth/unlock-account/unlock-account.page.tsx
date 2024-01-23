@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import _ from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 
 import { FormScreenContainer, Button } from '@project/components';
 import { userAuthService } from '@project/services';
@@ -24,7 +24,7 @@ export const UnlockAccountPage = () => {
   const unlockAccount = () => {
     const token = new URLSearchParams(location.search).get('token')!;
 
-    if (!_.isEmpty(token)) {
+    if (!isEmpty(token)) {
       userAuthService
         .unlock(token)
         .then(() => onSuccess())

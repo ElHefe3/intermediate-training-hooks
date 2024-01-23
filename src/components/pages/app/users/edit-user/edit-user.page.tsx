@@ -1,12 +1,13 @@
-import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
-import { toast } from 'react-hot-toast';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ErrorObject } from '@codehesion-za/headless';
+import { toast } from 'react-hot-toast';
 
 import { User, UserForm } from '@project/components';
+import { userService } from '@project/services';
 import { useSideModal } from '@project/hooks';
 import { userModel } from '@project/queries';
-import { userService } from '@project/services';
+
 import { EditUserPageProps } from './types';
 
 export const EditUserPage = ({ isArchived }: EditUserPageProps) => {

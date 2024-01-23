@@ -1,11 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { createColumnHelper } from '@tanstack/react-table';
-import _ from 'lodash';
+import isUndefined from 'lodash/isUndefined';
 
 import { Button, Table, User } from '@project/components';
-import { usePagination } from '@project/hooks';
-import { UserPageProps } from './types';
 import { useUsersQuery } from '@project/queries';
+import { usePagination } from '@project/hooks';
+
+import { UserPageProps } from './types';
 
 export const UsersPage = ({ isArchived }: UserPageProps) => {
   const navigate = useNavigate();
@@ -48,9 +49,11 @@ export const UsersPage = ({ isArchived }: UserPageProps) => {
       cell: ({ row }) => {
         const { id } = row.original;
 
+        const onClick = () => onEdit(id ?? 0);
+
         return (
           <span>
-            <Button isDisabled={_.isUndefined(id)} onClick={() => onEdit(id ?? 0)}>
+            <Button isDisabled={isUndefined(id)} onClick={onClick}>
               Edit
             </Button>
           </span>

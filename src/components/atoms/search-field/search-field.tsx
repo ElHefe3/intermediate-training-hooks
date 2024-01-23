@@ -1,5 +1,5 @@
 import React, { useState, useCallback, ChangeEvent } from 'react';
-import _ from 'lodash';
+import debounce from 'lodash/debounce';
 
 import { SearchFieldProps } from './types';
 
@@ -7,7 +7,7 @@ export const SearchField: React.FC<SearchFieldProps> = ({ placeholder, onChange 
   const [search, setSearch] = useState('');
 
   const validateInputDebounce = useCallback(
-    _.debounce((value) => onChange(value), 500),
+    debounce((value) => onChange(value), 500),
     [],
   );
 
