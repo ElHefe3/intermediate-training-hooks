@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import isNull from 'lodash';
 
 import {
   LoginValuesProps,
@@ -38,7 +38,7 @@ const resetPassword = (formData: ResetPasswordValuesProps) => {
 
 const doTokensExistInStorage = () => {
   const _trueIfBothExist = (accessToken: string | null, refreshToken: string | null) =>
-    !_.isNull(accessToken) && !_.isNull(refreshToken);
+    !isNull(accessToken) && !isNull(refreshToken);
 
   return userAuthUtils
     .getAccessAndRefreshTokens()

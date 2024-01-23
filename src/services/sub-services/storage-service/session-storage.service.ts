@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import isNil from 'lodash/isNil';
 
 function setItem(key: string, value: string | object): void {
   if (typeof value === 'object') {
@@ -8,7 +8,7 @@ function setItem(key: string, value: string | object): void {
 }
 
 function getItem(key: string): string | object | null {
-  if (!_.isNil(sessionStorage.getItem(key))) {
+  if (!isNil(sessionStorage.getItem(key))) {
     const storageObjectString = sessionStorage.getItem(key) ?? '';
     try {
       return JSON.parse(storageObjectString) as string | object | null;

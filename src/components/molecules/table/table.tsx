@@ -1,11 +1,12 @@
 import {
+  getPaginationRowModel,
   getCoreRowModel,
   useReactTable,
-  getPaginationRowModel,
   flexRender,
 } from '@tanstack/react-table';
 
-import { ActivityLoader } from '../../atoms';
+import { ActivityLoader } from '@project/components/atoms';
+
 import { TableProps } from './types';
 
 export const Table = <T extends Record<string, unknown>>({

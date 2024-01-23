@@ -1,8 +1,9 @@
-import _ from 'lodash';
+import map from 'lodash/map';
 
-import { User } from '@project/components';
-import { UserApi } from '@project/services';
 import { paginationModel } from '@project/models';
+import { UserApi } from '@project/services';
+import { User } from '@project/components';
+
 import { UserData, UserDataApi } from './types';
 
 export const userModel = (data?: UserApi): User => ({
@@ -13,6 +14,6 @@ export const userModel = (data?: UserApi): User => ({
 });
 
 export const userDataModel = (data?: UserDataApi): UserData => ({
-  users: _.map(data?.users ?? [], userModel),
+  users: map(data?.users ?? [], userModel),
   pagination: paginationModel(data?.meta),
 });

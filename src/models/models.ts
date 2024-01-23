@@ -1,4 +1,4 @@
-import { PaginationApi, Pagination } from '../types';
+import { PaginationApi, Pagination } from '@project/types';
 
 export const paginationModel = (data?: PaginationApi): Pagination => ({
   currentPage: data?.current_page ?? 0,

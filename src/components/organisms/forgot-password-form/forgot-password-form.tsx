@@ -1,13 +1,14 @@
-import React from 'react';
-import { FormikProps } from 'formik/dist/types';
-import { useMutation } from '@tanstack/react-query';
-import { toast } from 'react-hot-toast';
 import { Form, ErrorObject } from '@codehesion-za/headless';
+import { useMutation } from '@tanstack/react-query';
+import { FormikProps } from 'formik/dist/types';
+import { toast } from 'react-hot-toast';
+import React from 'react';
 
 import { FormBodyContainer, Button, TextField } from '@project/components';
 import { userAuthService } from '@project/services';
-import { forgotPasswordSchema } from './schemas';
+
 import { ForgotPasswordValuesProps } from './types';
+import { forgotPasswordSchema } from './schemas';
 
 export const ForgotPasswordForm: React.FC = () => {
   const initialValues = {

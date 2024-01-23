@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
-import { FormikProps } from 'formik/dist/types';
+import { Form, ErrorObject, Checkbox } from '@codehesion-za/headless';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
+import { FormikProps } from 'formik/dist/types';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { Form, ErrorObject, Checkbox } from '@codehesion-za/headless';
-import _ from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 
-import { Button, TextField } from '@project/components';
 import { localStorageService, userAuthService } from '@project/services';
+import { Button, TextField } from '@project/components';
 import config from '@project/config';
+
 import { LoginValuesProps, RouteState } from './types';
 import { loginSchema } from './schemas';
 
@@ -26,7 +27,7 @@ export const LoginForm = () => {
   const initialValues = {
     username: rememberEmail,
     password: '',
-    remember: !_.isEmpty(rememberEmail),
+    remember: !isEmpty(rememberEmail),
   };
 
   const onForgotPasswordClick = () => {

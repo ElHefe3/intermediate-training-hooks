@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { Disclosure } from '@headlessui/react';
+import startsWith from 'lodash/startsWith';
+import includes from 'lodash/includes';
+import isEmpty from 'lodash/isEmpty';
+import filter from 'lodash/filter';
 import {
-  ArchiveBoxIcon,
   ChevronDownIcon,
+  ArchiveBoxIcon,
+  UserGroupIcon,
   ChevronUpIcon,
   HomeIcon,
-  UserGroupIcon,
 } from '@heroicons/react/20/solid';
-import _ from 'lodash';
 
 import { Logo } from '@project/assets';
 import { ChildLinks, DrawerItemProps } from './types';
@@ -34,13 +37,11 @@ export const Drawer = () => {
     const [isActive, setIsActive] = useState(false);
     const [activeChild, setActiveChild] = useState('');
 
-    const hasSubItems = !_.isEmpty(subItems);
-    const includes = (_link: string) => _.includes(location.pathname, _link);
-    const hasNoIgnores = _.filter(ignoreLinks, includes).length === 0;
+    const hasSubItems = !isEmpty(subItems);
+    const _includes = (_link: string) => includes(location.pathname, _link);
+    const hasNoIgnores = filter(ignoreLinks, includes).length === 0;
 
-    const handleClick = () => {
-      setIsOpen(!isOpen);
-    };
+    const handleClick = () => setIsOpen(!isOpen);
 
     useEffect(() => {
       subItems.forEach((child) => {
@@ -49,11 +50,11 @@ export const Drawer = () => {
         if (strict) {
           _activeChild = location.pathname === child.link;
         } else {
-          const subLinkMatch = _.filter(child.matchLinks, includes).length > 0;
-          const subHasNoIgnores = _.filter(ignoreLinks, includes).length === 0;
+          const subLinkMatch = filter(child.matchLinks, _includes).length > 0;
+          const subHasNoIgnores = filter(ignoreLinks, _includes).length === 0;
 
           _activeChild =
-            _.startsWith(location.pathname, child.link) &&
+            startsWith(location.pathname, child.link) &&
             hasNoIgnores &&
             subLinkMatch &&
             subHasNoIgnores;
@@ -68,9 +69,9 @@ export const Drawer = () => {
       if (strict && location.pathname === link) {
         setIsActive(true);
       } else {
-        const subLinkMatch = _.filter(matchLinks, includes).length > 0;
+        const subLinkMatch = filter(matchLinks, includes).length > 0;
 
-        if (_.startsWith(location.pathname, link) && subLinkMatch && hasNoIgnores) {
+        if (startsWith(location.pathname, link) && subLinkMatch && hasNoIgnores) {
           setIsActive(true);
         }
       }
